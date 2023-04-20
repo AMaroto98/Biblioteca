@@ -1,10 +1,14 @@
-public class Persona {
+import java.util.Scanner;
+
+public abstract class Persona {
 
     // Atributos de la clase
     private String nombre;
     private String primerApellido;
     private String segundoApellido;
     private int edad;
+
+    public static Scanner sc = new Scanner(System.in);
 
     // Constructor vacio
     public Persona() {
@@ -15,7 +19,7 @@ public class Persona {
         this.nombre = nombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
-        this.edad = edad;
+        setEdad(edad);
     }
 
     // Constructor copia
@@ -57,7 +61,37 @@ public class Persona {
     }
 
     public void setEdad(int edad) {
+
+        while (edad < 1) {
+
+            System.out.print("Introduce una edad válida: ");
+            edad = sc.nextInt();
+            
+        }
+
         this.edad = edad;
+        
+        // vacio el buffer
+        sc.nextLine();
+    }
+
+    public void solicitarDatosPersona() {
+
+        System.out.print("Introduce el nombre: ");
+        nombre = sc.nextLine();
+
+        System.out.print("Introduce el primer apellido: ");
+        primerApellido = sc.nextLine();
+
+        System.out.print("Introduce el segundo apellido: ");
+        segundoApellido = sc.nextLine();
+
+        System.out.print("Introduce la edad: ");
+        edad = sc.nextInt();
+        setEdad(edad);
+
+        // Vacio el buffer del Scanner
+        sc.nextLine();
     }
 
     @Override
