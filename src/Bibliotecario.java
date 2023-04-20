@@ -1,5 +1,5 @@
 public class Bibliotecario extends Persona {
-    
+
     // Atributos de la clase
     private String puestoTrabajo;
     private String nif;
@@ -11,11 +11,12 @@ public class Bibliotecario extends Persona {
     }
 
     // Constructor con todos los parámetros
-    public Bibliotecario(String nombre, String primerApellido, String segundoApellido, int edad, String puestoTrabajo, String nif, String contraseña) {
+    public Bibliotecario(String nombre, String primerApellido, String segundoApellido, int edad, String puestoTrabajo,
+            String nif, String contraseña) {
         super(nombre, primerApellido, segundoApellido, edad);
         this.puestoTrabajo = puestoTrabajo;
-        this.nif = nif;
-        this.contraseña = contraseña;
+        setNIF(nif);
+        setContraseña(contraseña);
     }
 
     // Constructor copia
@@ -44,12 +45,50 @@ public class Bibliotecario extends Persona {
         this.puestoTrabajo = puestoTrabajo;
     }
 
-    public void setNif(String nif) {
+    public void setNIF(String nif) {
+
+        // expresión regular para validar el formato del NIF
+        String regex = "^\\d{8}[a-zA-Z]$";
+
+        while (!nif.matches(regex)) {
+
+            System.out.print("Introduce un NIF con 8 números y 1 letra: ");
+            nif = Persona.sc.nextLine();
+
+        }
+
         this.nif = nif;
+
     }
 
     public void setContraseña(String contraseña) {
+
+        while (contraseña == null || contraseña.length() < 8) {
+
+            System.out.print("Introduce una contraseña con almenos 8 carácteres: ");
+            contraseña = Libro.sc.nextLine();
+
+        }
+
         this.contraseña = contraseña;
+    }
+
+    @Override
+    public void solicitarDatosPersona() {
+
+        super.solicitarDatosPersona();
+
+        System.out.print("Introduce el puesto de trabajo: ");
+        puestoTrabajo = Persona.sc.nextLine();
+
+        System.out.print("Introduce el NIF: ");
+        nif = Persona.sc.nextLine();
+        setNIF(nif);
+
+        System.out.print("Introduce la contraseña: ");
+        contraseña = Persona.sc.nextLine();
+        setContraseña(contraseña);
+
     }
 
     @Override
@@ -57,9 +96,4 @@ public class Bibliotecario extends Persona {
         return "Bibliotecario Puesto de trabajo: " + puestoTrabajo + ", NIF: " + nif + ", Contraseña: " + contraseña;
     }
 
-    
-
-    
-
-    
 }
