@@ -90,8 +90,6 @@ public abstract class Persona {
         edad = sc.nextInt();
         setEdad(edad);
 
-        // Vacio el buffer del Scanner
-        sc.nextLine();
     }
 
     @Override
