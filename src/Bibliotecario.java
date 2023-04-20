@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Bibliotecario extends Persona {
 
     // Atributos de la clase
@@ -89,6 +91,25 @@ public class Bibliotecario extends Persona {
         contraseña = Persona.sc.nextLine();
         setContraseña(contraseña);
 
+    }
+
+    public static void añadirBibliotecario(ArrayList<Persona> listaDePersonas) {
+
+        Bibliotecario bibliotecario = new Bibliotecario();
+        bibliotecario.solicitarDatosPersona();
+        listaDePersonas.add(bibliotecario);
+
+        System.out.println("Bibliotecario " + bibliotecario.getNombre() + " añadido con éxito");
+    }
+
+    public static void mostrarBibliotecarios(ArrayList<Persona> listaDePersonas) {
+
+        for (Persona persona : listaDePersonas) {
+            if (persona instanceof Bibliotecario) {
+                System.out.println(persona);
+                
+            }
+        }
     }
 
     @Override
