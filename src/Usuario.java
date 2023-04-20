@@ -83,12 +83,31 @@ public class Usuario extends Persona {
 
         // Ni idea de como poner la lista de reservas aquí, de momento no la pongo
 
-    }   
+    }
+
+    public static void añadirUsuario(ArrayList<Persona> listaDePersonas) {
+
+        Usuario usuario = new Usuario();
+        usuario.solicitarDatosPersona();
+        listaDePersonas.add(usuario);
+
+        System.out.println("Usuario " + usuario.getNombre() + " añadido con éxito");
+    }
+
+    public static void mostrarUsuarios(ArrayList<Persona> listaDePersonas) {
+
+        for (Persona persona : listaDePersonas) {
+            if (persona instanceof Usuario) {
+                System.out.println(persona);
+                
+            }
+        }
+    }
 
     @Override
     public String toString() {
         // super.ToString() para que aparezca la información de la persona
-        return super.toString() + "Teléfono: " + telefono + ", Dirección: " + direccion + ", Codigo Postal: "
+        return super.toString() + " Teléfono: " + telefono + ", Dirección: " + direccion + ", Codigo Postal: "
                 + codigoPostal + ", Lista de Reserva: " + listaReserva;
     }
 
