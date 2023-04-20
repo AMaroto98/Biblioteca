@@ -16,7 +16,7 @@ public class Usuario extends Persona {
 
     // Constructor con todos los parámetros
     public Usuario(String nombre, String primerApellido, String segundoApellido, int edad, String telefono,
-            String direccion, String codigoPostal, ArrayList<Reserva> listaReserva) {
+            String direccion, String codigoPostal) {
         super(nombre, primerApellido, segundoApellido, edad);
         this.telefono = telefono;
         this.direccion = direccion;
@@ -66,6 +66,24 @@ public class Usuario extends Persona {
     public void setListaReserva(ArrayList<Reserva> listaReserva) {
         this.listaReserva = listaReserva;
     }
+
+    @Override
+    public void solicitarDatosPersona() {
+
+        super.solicitarDatosPersona();
+
+        System.out.print("Introduce el número de teléfono: ");
+        telefono = Persona.sc.nextLine();
+
+        System.out.print("Introduce la dirección: ");
+        direccion = Persona.sc.nextLine();
+
+        System.out.print("Introduce el código postal: ");
+        codigoPostal = Persona.sc.nextLine();
+
+        // Ni idea de como poner la lista de reservas aquí, de momento no la pongo
+
+    }   
 
     @Override
     public String toString() {
