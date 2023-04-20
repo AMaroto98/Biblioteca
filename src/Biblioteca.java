@@ -6,7 +6,7 @@ public class Biblioteca {
     // Atributos
     private String nombre;
     private ArrayList<Libro> listaLibros;
-    private ArrayList<Persona> listaPersonal;
+    private ArrayList<Persona> listaPersonas;
 
     // Constructor vacio
     public Biblioteca() {
@@ -14,17 +14,17 @@ public class Biblioteca {
     }
 
     // Constructor con todos los parámetros
-    public Biblioteca(String nombre, ArrayList<Libro> listaLibros, ArrayList<Persona> listaPersonal) {
+    public Biblioteca(String nombre, ArrayList<Libro> listaLibros, ArrayList<Persona> listaPersonas) {
         setNombre(nombre);
         this.listaLibros = listaLibros;
-        this.listaPersonal = listaPersonal;
+        this.listaPersonas = listaPersonas;
     }
 
     // Constructor copia
     public Biblioteca(Biblioteca original) {
         this.nombre = original.nombre;
         this.listaLibros = original.listaLibros;
-        this.listaPersonal = original.listaPersonal;
+        this.listaPersonas = original.listaPersonas;
     }
 
     // Getters
@@ -36,8 +36,8 @@ public class Biblioteca {
         return listaLibros;
     }
 
-    public ArrayList<Persona> getListaPersonal() {
-        return listaPersonal;
+    public ArrayList<Persona> getlistaPersonas() {
+        return listaPersonas;
     }
 
 
@@ -57,8 +57,8 @@ public class Biblioteca {
         this.listaLibros = listaLibros;
     }
 
-    public void setListaPersonal(ArrayList<Persona> listaPersonal) {
-        this.listaPersonal = listaPersonal;
+    public void setlistaPersonas(ArrayList<Persona> listaPersonas) {
+        this.listaPersonas = listaPersonas;
     }
 
     // Métodos
@@ -112,7 +112,7 @@ public class Biblioteca {
 
     @Override
     public String toString() {
-        return "Nombre: " + nombre + ", Lista de Libros: " + listaLibros.size() + ", Lista de Personal: " + listaPersonal.size();
+        return "Nombre: " + nombre + ", Lista de Libros: " + listaLibros.size() + ", Lista de Personal: " + listaPersonas.size();
     }
 
     
