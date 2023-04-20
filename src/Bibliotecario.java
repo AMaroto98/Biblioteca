@@ -112,6 +112,30 @@ public class Bibliotecario extends Persona {
         }
     }
 
+    public static void eliminarBibliotecario(ArrayList<Persona> listaDePersona) {
+
+        System.out.print("Introduce el NIF del bibliotecario que quieres eliminar: ");
+        String nif = Libro.sc.nextLine();
+
+        for (Persona persona : listaDePersona) {
+
+            if (persona instanceof Bibliotecario) {
+
+                Bibliotecario bibliotecario = (Bibliotecario) persona;
+
+                if (nif.equals(bibliotecario.getNif())) {
+
+                    listaDePersona.remove(bibliotecario);
+                    System.out.println("Bibliotecario " + bibliotecario.getNombre() + " ha sido eliminado con éxito");
+                    
+                } else {
+
+                    System.out.println("No hay ningún bibliotecario con el NIF: " + nif);
+                }
+            }
+        }
+    }
+
     @Override
     public String toString() {
         return "Bibliotecario Puesto de trabajo: " + puestoTrabajo + ", NIF: " + nif + ", Contraseña: " + contraseña;
