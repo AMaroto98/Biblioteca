@@ -104,6 +104,30 @@ public class Usuario extends Persona {
         }
     }
 
+    public static void eliminarUsuario(ArrayList<Persona> listaDePersona) {
+
+        System.out.print("Introduce el teléfono del usuario que quieres eliminar: ");
+        String telefono = Libro.sc.nextLine();
+
+        for (Persona persona : listaDePersona) {
+
+            if (persona instanceof Usuario) {
+
+                Usuario usuario = (Usuario) persona;
+
+                if (telefono.equals(usuario.getTelefono())) {
+
+                    listaDePersona.remove(usuario);
+                    System.out.println("Usuario " + usuario.getNombre() + " ha sido eliminado con éxito");
+                    
+                } else {
+                    
+                    System.out.println("No hay ningún usuario con el teléfono: " + telefono);
+                }
+            }
+        }
+    }
+
     @Override
     public String toString() {
         // super.ToString() para que aparezca la información de la persona
