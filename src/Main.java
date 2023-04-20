@@ -7,7 +7,6 @@ public class Main {
 
         ArrayList<Libro> listaLibros = new ArrayList<>();
         ArrayList<Persona> listaDePersonas = new ArrayList<>();
-        ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 
         Biblioteca biblioteca = new Biblioteca("Borja Moll", listaLibros, listaDePersonas);
 
@@ -24,9 +23,8 @@ public class Main {
 
             System.out.println("------------ Menú ------------");
             System.out.println("1. Gestionar Libros");
-            System.out.println("2. Gestionar Personal");
-            System.out.println("3. Gestionar Usuarios");
-            System.out.println("4. Gestionar Reservas");
+            System.out.println("2. Gestionar Personas");
+            System.out.println("3. Gestionar Reservas");
             System.out.println("5. Salir");
             System.out.println("------------------------------ \n");
 
@@ -122,13 +120,14 @@ public class Main {
 
                         ClearTerminal.clearTerminal();
 
-                        System.out.println("------------ Gestionar Personal ------------");
+                        System.out.println("------------ Gestionar Personas ------------");
                         System.out.println("1. Añadir bibliotecario");
                         System.out.println("2. Añadir usuario");
                         System.out.println("3. Mostrar bibliotecarios");
                         System.out.println("4. Mostrar usuarios");
                         System.out.println("5. Eliminar bibliotecario");
-                        System.out.println("6. Atrás");
+                        System.out.println("6. Eliminar usuario");
+                        System.out.println("7. Atrás");
                         System.out.println("-------------------------------------------- \n");
 
                         System.out.print("Elige una de las opciones disponibles: ");
@@ -159,13 +158,27 @@ public class Main {
                                 break;
 
                             case 4:
-                            
+
                                 Usuario.mostrarUsuarios(listaDePersonas);
-                                Sleep.pause(999999);
+                                Sleep.pause(3000);
+                                ClearTerminal.clearTerminal();
+                                break;
+
+                            case 5:
+
+                                Bibliotecario.eliminarBibliotecario(listaDePersonas);
+                                Sleep.pause(3000);
                                 ClearTerminal.clearTerminal();
                                 break;
 
                             case 6:
+
+                                Usuario.eliminarUsuario(listaDePersonas);
+                                Sleep.pause(3000);
+                                ClearTerminal.clearTerminal();
+                                break;
+
+                            case 7:
 
                                 atras = true;
                                 ClearTerminal.clearTerminal();
