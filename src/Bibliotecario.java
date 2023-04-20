@@ -107,7 +107,7 @@ public class Bibliotecario extends Persona {
         for (Persona persona : listaDePersonas) {
             if (persona instanceof Bibliotecario) {
                 System.out.println(persona);
-                
+
             }
         }
     }
@@ -127,13 +127,56 @@ public class Bibliotecario extends Persona {
 
                     listaDePersona.remove(bibliotecario);
                     System.out.println("Bibliotecario " + bibliotecario.getNombre() + " ha sido eliminado con éxito");
-                    
+
                 } else {
 
                     System.out.println("No hay ningún bibliotecario con el NIF: " + nif);
                 }
             }
         }
+    }
+
+    public static boolean iniciarSesion(ArrayList<Persona> listaDePersonas) {
+
+        System.out.print("Introduce el NIF del bibliotecario: ");
+        String nif = Libro.sc.nextLine();
+
+        System.out.print("Introduce la contraseña: ");
+        String contraseña = Libro.sc.nextLine();
+
+        boolean inicioCorrecto = false;
+
+        for (Persona persona : listaDePersonas) {
+
+            if (persona instanceof Bibliotecario) {
+
+                Bibliotecario bibliotecario = (Bibliotecario) persona;
+
+                if ((nif.equals(bibliotecario.getNif())) && (contraseña.equals(bibliotecario.getContraseña()))) {
+
+                    System.out.println("NIF y contraseña correctos");
+                    Sleep.pause(2000);
+                    System.out.println("Bienvenido " + bibliotecario.getNombre());
+                    Sleep.pause(3000);
+
+                    inicioCorrecto = true;
+
+                    return inicioCorrecto;
+                    
+                } else {
+
+                    System.out.println("NIF o contraseña incorrectos. Intentalo de nuevo...");
+
+                }
+            }
+        }
+        return inicioCorrecto;
+    }
+
+    public void reservarLibro() {
+    }
+
+    public void devolverLibro() {
     }
 
     @Override
