@@ -169,7 +169,7 @@ public class Bibliotecario extends Persona {
         return null;
     }
 
-    public void reservarLibro(ArrayList<Persona> listaDePersonas,  ArrayList<Libro> listaLibros) {
+    public void reservarLibro(ArrayList<Persona> listaDePersonas, ArrayList<Libro> listaLibros) {
 
         System.out.print("Introduce un teléfono del usuario: ");
         String telefono = Libro.sc.nextLine();
