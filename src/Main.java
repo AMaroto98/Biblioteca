@@ -193,22 +193,21 @@ public class Main {
                     }
 
                     break;
-                
+
                 case 3:
 
                     while (!atras) {
 
                         ClearTerminal.clearTerminal();
 
-                        System.out.println("------------ Gestionar Personas ------------");
+                        System.out.println("------------ Iniciar Sesión ------------");
                         System.out.println("1. Iniciar sesión");
                         System.out.println("2. Atrás");
-                        System.out.println("-------------------------------------------- \n");
+                        System.out.println("---------------------------------------- \n");
 
                         System.out.print("Elige una de las opciones disponibles: ");
                         opcion = sc.nextInt();
                         System.out.println();
-
 
                         // Restablecer la variable a false para no volver de golpe al menú principal
                         atras = false;
@@ -217,21 +216,22 @@ public class Main {
 
                             case 1:
 
-                                if (Bibliotecario.iniciarSesion(listaDePersonas) == true) {
+                                Bibliotecario bibliotecario = Bibliotecario.iniciarSesion(listaDePersonas);
+
+                                if (bibliotecario != null) {
 
                                     while (!atras) {
 
                                         ClearTerminal.clearTerminal();
 
-                                        // Añadir si eso
-                                        System.out.println("Sesión iniciada como: ");
-                
+                                        System.out.println("Sesión iniciada como: " + bibliotecario.getNombre() + " " + bibliotecario.getPrimerApellido() + "\n");
+
                                         System.out.println("------------ Reservas ------------");
                                         System.out.println("1. Reservar libro");
                                         System.out.println("2. Devolver libro");
                                         System.out.println("3. Atrás");
                                         System.out.println("----------------------------------- \n");
-                
+
                                         System.out.print("Elige una de las opciones disponibles: ");
                                         opcion = sc.nextInt();
                                         System.out.println();
@@ -239,7 +239,7 @@ public class Main {
                                         switch (opcion) {
 
                                             case 1:
-                                                
+
                                                 Sleep.pause(3000);
                                                 ClearTerminal.clearTerminal();
                                                 break;
@@ -249,14 +249,13 @@ public class Main {
                                                 Sleep.pause(3000);
                                                 ClearTerminal.clearTerminal();
                                                 break;
-                                            
+
                                             case 3:
 
                                                 atras = true;
                                                 ClearTerminal.clearTerminal();
                                                 break;
-                                            
-                                        
+
                                             default:
 
                                                 System.out.println("Opción invalida, vuelve a intentarlo");
@@ -265,13 +264,14 @@ public class Main {
                                     }
 
                                     break;
-                                    
+
                                 } else {
 
+                                    System.out.println("Error de inicio de sesión");
                                     ClearTerminal.clearTerminal();
                                     break;
                                 }
-                                
+
                             case 2:
 
                                 atras = true;
@@ -279,14 +279,13 @@ public class Main {
                                 break;
 
                             default:
-                            System.out.println("Opción invalida, vuelve a intentarlo");
-                            break;
+                                System.out.println("Opción invalida, vuelve a intentarlo");
+                                break;
 
                         }
                     }
 
                     break;
-
 
             } // Switch principal
         } // While principal
