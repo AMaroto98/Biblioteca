@@ -92,6 +92,8 @@ public abstract class Persona {
 
     }
 
+    // public abstract void cambiarContraseña();
+
     @Override
     public String toString() {
         return "Persona Nombre: " + nombre + ", Primer Apellido: " + primerApellido + ", Segundo Apellido: "
