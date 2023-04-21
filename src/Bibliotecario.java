@@ -136,15 +136,13 @@ public class Bibliotecario extends Persona {
         }
     }
 
-    public static boolean iniciarSesion(ArrayList<Persona> listaDePersonas) {
+    public static Bibliotecario iniciarSesion(ArrayList<Persona> listaDePersonas) {
 
         System.out.print("Introduce el NIF del bibliotecario: ");
         String nif = Libro.sc.nextLine();
 
         System.out.print("Introduce la contraseña: ");
         String contraseña = Libro.sc.nextLine();
-
-        boolean inicioCorrecto = false;
 
         for (Persona persona : listaDePersonas) {
 
@@ -159,10 +157,8 @@ public class Bibliotecario extends Persona {
                     System.out.println("Bienvenido " + bibliotecario.getNombre());
                     Sleep.pause(3000);
 
-                    inicioCorrecto = true;
-
-                    return inicioCorrecto;
-                    
+                    return bibliotecario;
+ 
                 } else {
 
                     System.out.println("NIF o contraseña incorrectos. Intentalo de nuevo...");
@@ -170,10 +166,37 @@ public class Bibliotecario extends Persona {
                 }
             }
         }
-        return inicioCorrecto;
+        return null;
     }
 
-    public void reservarLibro() {
+    public void reservarLibro(ArrayList<Persona> listaDePersonas,  ArrayList<Libro> listaLibros) {
+
+        System.out.print("Introduce un teléfono del usuario: ");
+        String telefono = Libro.sc.nextLine();
+
+        System.out.print("Introduce el correo electrónico del usuario: ");
+        String email = Libro.sc.nextLine();
+
+        for (Persona persona : listaDePersonas) {
+
+            if (persona instanceof Usuario) {
+
+                Usuario usuario = (Usuario) persona;
+
+                if ((telefono.equals(usuario.getTelefono())) && (email.equals(usuario.getEmail()))) {
+
+                    System.out.println("Los datos de usuario " + usuario.getNombre() + " son correctos");
+                    Sleep.pause(1000);
+
+                    System.out.print("Introduce el ISBN del libro que quieres reservar: ");
+                    String isbn = Libro.sc.nextLine();
+                    
+                }
+                
+            }
+            
+        }
+
     }
 
     public void devolverLibro() {
