@@ -24,7 +24,7 @@ public class Main {
             System.out.println("------------ Menú ------------");
             System.out.println("1. Gestionar Libros");
             System.out.println("2. Gestionar Personas");
-            System.out.println("3. Gestionar Reservas");
+            System.out.println("3. Iniciar Sesión");
             System.out.println("5. Salir");
             System.out.println("------------------------------ \n");
 
@@ -201,8 +201,9 @@ public class Main {
                         ClearTerminal.clearTerminal();
 
                         System.out.println("------------ Iniciar Sesión ------------");
-                        System.out.println("1. Iniciar sesión");
-                        System.out.println("2. Atrás");
+                        System.out.println("1. Iniciar sesión para bibliotecario");
+                        System.out.println("2. Iniciar sesión para usuarios");
+                        System.out.println("3. Atrás");
                         System.out.println("---------------------------------------- \n");
 
                         System.out.print("Elige una de las opciones disponibles: ");
@@ -224,7 +225,8 @@ public class Main {
 
                                         ClearTerminal.clearTerminal();
 
-                                        System.out.println("Sesión iniciada como: " + bibliotecario.getNombre() + " " + bibliotecario.getPrimerApellido() + "\n");
+                                        System.out.println("Sesión iniciada como: " + bibliotecario.getNombre() + " "
+                                                + bibliotecario.getPrimerApellido() + "\n");
 
                                         System.out.println("------------ Reservas ------------");
                                         System.out.println("1. Reservar libro");
@@ -274,6 +276,59 @@ public class Main {
 
                             case 2:
 
+                                Usuario usuario = Usuario.iniciarSesion(listaDePersonas);
+
+                                if (usuario != null) {
+
+                                    while (!atras) {
+
+                                        ClearTerminal.clearTerminal();
+
+                                        System.out.println("Sesión iniciada como: " + usuario.getNombre() + " "
+                                                + usuario.getPrimerApellido() + "\n");
+
+                                        System.out.println("------------ Usuario ------------");
+                                        System.out.println("1. Saludar");
+                                        System.out.println("2. Atrás");
+                                        System.out.println("--------------------------------- \n");
+
+                                        System.out.print("Elige una de las opciones disponibles: ");
+                                        opcion = sc.nextInt();
+                                        System.out.println();
+
+                                        switch (opcion) {
+
+                                            case 1:
+
+                                                usuario.saludar();
+                                                Sleep.pause(3000);
+                                                ClearTerminal.clearTerminal();
+                                                break;
+
+                                            case 2:
+
+                                                atras = true;
+                                                ClearTerminal.clearTerminal();
+                                                break;
+
+                                            default:
+
+                                                System.out.println("Opción invalida, vuelve a intentarlo");
+                                                break;
+                                        }
+                                    }
+
+                                    break;
+
+                                } else {
+
+                                    System.out.println("Error de inicio de sesión");
+                                    ClearTerminal.clearTerminal();
+                                    break;
+                                }
+
+                            case 3:
+
                                 atras = true;
                                 ClearTerminal.clearTerminal();
                                 break;
@@ -285,6 +340,12 @@ public class Main {
                         }
                     }
 
+                    break;
+
+                case 5:
+
+                    salir = true;
+                    ClearTerminal.clearTerminal();
                     break;
 
             } // Switch principal
