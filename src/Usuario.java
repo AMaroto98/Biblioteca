@@ -6,6 +6,7 @@ public class Usuario extends Persona {
     private String telefono;
     private String direccion;
     private String codigoPostal;
+    private String email;
     private ArrayList<Reserva> listaReserva;
 
     // Constructor vacio
@@ -15,12 +16,12 @@ public class Usuario extends Persona {
     }
 
     // Constructor con todos los parámetros
-    public Usuario(String nombre, String primerApellido, String segundoApellido, int edad, String telefono,
-            String direccion, String codigoPostal) {
+    public Usuario(String nombre, String primerApellido, String segundoApellido, int edad, String telefono, String direccion, String codigoPostal, String email) {
         super(nombre, primerApellido, segundoApellido, edad);
         this.telefono = telefono;
         this.direccion = direccion;
         this.codigoPostal = codigoPostal;
+        this.email = email;
         this.listaReserva = new ArrayList<>(listaReserva);
     }
 
@@ -30,6 +31,7 @@ public class Usuario extends Persona {
         this.telefono = original.telefono;
         this.direccion = original.direccion;
         this.codigoPostal = original.codigoPostal;
+        this.email = original.email;
         this.listaReserva = new ArrayList<>(original.listaReserva);
     }
 
@@ -44,6 +46,10 @@ public class Usuario extends Persona {
 
     public String getCodigoPostal() {
         return codigoPostal;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public ArrayList<Reserva> getListaReserva() {
@@ -63,6 +69,10 @@ public class Usuario extends Persona {
         this.codigoPostal = codigoPostal;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setListaReserva(ArrayList<Reserva> listaReserva) {
         this.listaReserva = listaReserva;
     }
@@ -80,6 +90,9 @@ public class Usuario extends Persona {
 
         System.out.print("Introduce el código postal: ");
         codigoPostal = Persona.sc.nextLine();
+
+        System.out.print("Introduce el correo electrónico: ");
+        email = Persona.sc.nextLine();
 
         // Ni idea de como poner la lista de reservas aquí, de momento no la pongo
 
@@ -131,8 +144,7 @@ public class Usuario extends Persona {
     @Override
     public String toString() {
         // super.ToString() para que aparezca la información de la persona
-        return super.toString() + " Teléfono: " + telefono + ", Dirección: " + direccion + ", Codigo Postal: "
-                + codigoPostal + ", Lista de Reserva: " + listaReserva;
+        return super.toString() + " Teléfono: " + telefono + ", Dirección: " + direccion + ", Codigo Postal: " + codigoPostal + ", Email: " + email + ", Lista de Reserva: " + listaReserva;
     }
 
 }
