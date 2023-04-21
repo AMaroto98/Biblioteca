@@ -141,6 +141,43 @@ public class Usuario extends Persona {
         }
     }
 
+    public static Usuario iniciarSesion(ArrayList<Persona> listaDePersonas) {
+
+        System.out.print("Introduce el teléfono: ");
+        String telefono = Libro.sc.nextLine();
+
+        System.out.print("Introduce el email: ");
+        String email = Libro.sc.nextLine();
+
+        for (Persona persona : listaDePersonas) {
+
+            if (persona instanceof Usuario) {
+
+                Usuario usuario = (Usuario) persona;
+
+                if ((telefono.equals(usuario.getTelefono())) && (email.equals(usuario.getEmail()))) {
+
+                    System.out.println("Teléfono y email correctos");
+                    Sleep.pause(2000);
+                    System.out.println("Bienvenido " + usuario.getNombre());
+                    Sleep.pause(3000);
+
+                    return usuario;
+ 
+                } else {
+
+                    System.out.println("Teléfono o email incorrectos. Intentalo de nuevo...");
+
+                }
+            }
+        }
+        return null;
+    }
+
+    public void saludar() {
+        System.out.println("Hola, vuelve por donde has venido");
+    }
+
     @Override
     public String toString() {
         // super.ToString() para que aparezca la información de la persona
