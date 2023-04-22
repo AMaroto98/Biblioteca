@@ -13,7 +13,7 @@ public class Reserva {
     // Constructor con todos los parámetros
     public Reserva(Libro libro, LocalDateTime fechaHora) {
         this.libro = libro;
-        this.fechaHora = fechaHora;
+        setFechaHora();
     }
 
     // Constructor Copia
@@ -36,8 +36,17 @@ public class Reserva {
         this.libro = libro;
     }
 
-    public void setFechaHora(LocalDateTime fechaHora) {
-        this.fechaHora = fechaHora;
+    public void setFechaHora() {
+        this.fechaHora = LocalDateTime.now();
+    }
+
+    public static Reserva crearReserva(Libro libro) {
+
+        Reserva reserva = new Reserva();
+        reserva.setLibro(libro);
+        reserva.setFechaHora();
+        return reserva;
+
     }
 
     @Override
