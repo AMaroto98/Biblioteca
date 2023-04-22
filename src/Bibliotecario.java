@@ -154,7 +154,7 @@ public class Bibliotecario extends Persona {
 
                     System.out.println("NIF y contraseña correctos");
                     Sleep.pause(2000);
-                    System.out.println("Bienvenido " + bibliotecario.getNombre());
+                    System.out.println("Bienvenido " + bibliotecario.getNombre() + " " + bibliotecario.getPrimerApellido());
                     Sleep.pause(3000);
 
                     return bibliotecario;
@@ -162,6 +162,7 @@ public class Bibliotecario extends Persona {
                 } else {
 
                     System.out.println("NIF o contraseña incorrectos. Intentalo de nuevo...");
+                    Sleep.pause(3000);
 
                 }
             }
@@ -185,11 +186,41 @@ public class Bibliotecario extends Persona {
 
                 if ((telefono.equals(usuario.getTelefono())) && (email.equals(usuario.getEmail()))) {
 
-                    System.out.println("Los datos de usuario " + usuario.getNombre() + " son correctos");
+                    System.out.println("Los datos de usuario " + usuario.getNombre() + " son correctos \n");
                     Sleep.pause(1000);
 
-                    System.out.print("Introduce el ISBN del libro que quieres reservar: ");
-                    String isbn = Libro.sc.nextLine();
+                    if (usuario.getListaReserva().size() == 5) {
+
+                        System.out.println("El número máximo de libros reservados a la vez es 5");
+                        break; //Quitar break;
+                        
+                    } else {
+
+                        System.out.print("Introduce el ISBN del libro que quieres reservar: ");
+                        String isbn = Libro.sc.nextLine();
+
+                        for (Libro libro : listaLibros) {
+
+                            if (isbn.equals(libro.getISBN())) {
+
+                                if (libro.isPrestado()) {
+
+                                    System.out.println("Lo siento, el libro ya está reservado");
+                                    
+                                } else {
+
+                                    libro.setPrestado(true);
+                                    Reserva reserva = Reserva.crearReserva(libro);
+                                    usuario.añadirLibroReservado(reserva);
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+
+                    }
+
                     
                 }
                 
