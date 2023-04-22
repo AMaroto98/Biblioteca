@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Usuario extends Persona {
 
@@ -22,7 +23,7 @@ public class Usuario extends Persona {
         this.direccion = direccion;
         this.codigoPostal = codigoPostal;
         this.email = email;
-        this.listaReserva = new ArrayList<>(listaReserva);
+        this.listaReserva = new ArrayList<>(Arrays.asList(new Reserva[1]));    
     }
 
     // Constructor copia
@@ -94,8 +95,6 @@ public class Usuario extends Persona {
         System.out.print("Introduce el correo electrónico: ");
         email = Persona.sc.nextLine();
 
-        // Ni idea de como poner la lista de reservas aquí, de momento no la pongo
-
     }
 
     public static void añadirUsuario(ArrayList<Persona> listaDePersonas) {
@@ -159,7 +158,7 @@ public class Usuario extends Persona {
 
                     System.out.println("Teléfono y email correctos");
                     Sleep.pause(2000);
-                    System.out.println("Bienvenido " + usuario.getNombre());
+                    System.out.println("Bienvenido " + usuario.getNombre() + " " + usuario.getPrimerApellido());
                     Sleep.pause(3000);
 
                     return usuario;
@@ -172,6 +171,13 @@ public class Usuario extends Persona {
             }
         }
         return null;
+    }
+
+
+    public void añadirLibroReservado(Reserva reserva) {
+
+        listaReserva.add(reserva);
+
     }
 
     public void saludar() {
