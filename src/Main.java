@@ -1,18 +1,37 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.time.LocalTime;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        // Creo las lista que necesitará el objeto Biblioteca
         ArrayList<Libro> listaLibros = new ArrayList<>();
         ArrayList<Persona> listaDePersonas = new ArrayList<>();
 
+        // Librerias para la hora del Menú
+        LocalTime horaActual = LocalTime.now();
+
+        // Añado un bibliotecario para poder Iniciar Sesión la primera vez
+        Bibliotecario administrador = new Bibliotecario("Chicote", "Chicote", "Chicote", 35, "Cocinero", "12345678A",
+                "12345678");
+        listaDePersonas.add((Persona) administrador);
+
+        // Añado un usuario para poder hacer pruebas
+        Usuario usuarioPruebas = new Usuario("Antonio", "Maroto", "Blasco", 25, "655303348", "Calle Piruleta", "07011",
+                "antoniomarotoblasco@gmail.com");
+        listaDePersonas.add((Persona) usuarioPruebas);
+
+        // Creo la biblioteca del Borja Moll
         Biblioteca biblioteca = new Biblioteca("Borja Moll", listaLibros, listaDePersonas);
 
+        // Creo Scanner y variables que usaré en el menú principal y anidados
         Scanner sc = new Scanner(System.in);
         boolean salir = false;
         boolean atras = false;
+        boolean atrasAnidado = false;
         int opcionPrincipal;
         int opcion;
 
@@ -21,335 +40,378 @@ public class Main {
             // Limpiamos la terminal
             ClearTerminal.clearTerminal();
 
-            System.out.println("------------ Menú ------------");
-            System.out.println("1. Gestionar Libros");
-            System.out.println("2. Gestionar Personas");
-            System.out.println("3. Iniciar Sesión");
-            System.out.println("5. Salir");
-            System.out.println("------------------------------ \n");
+            System.out.println("Hora: " + horaActual.getHour() + ":" + horaActual.getMinute() + "\n");
 
-            System.out.print("Elige una de las opciones disponibles: ");
-            opcionPrincipal = sc.nextInt();
-            System.out.println();
+            System.out.println("------------ Menú Principal ------------");
+            System.out.println("1. Iniciar Sesión como Bibliotecario");
+            System.out.println("2. Iniciar Sesión como Usuario");
+            System.out.println("3. Repositorio Github");
+            System.out.println("4. Salir");
+            System.out.println("--------------------------------------- \n");
+
+            try {
+
+                System.out.print("Elige una de las opciones disponibles: ");
+                opcionPrincipal = sc.nextInt();
+                System.out.println();
+
+            } catch (InputMismatchException e) {
+
+                System.out.println("Opción invalida, debes ingresar un número");
+                Sleep.pause(2000);
+                sc.nextLine(); // limpiamos el scanner para evitar un loop infinito
+                continue; // volvemos al inicio del loop
+            }
 
             // Restablecer la variable a false en cada caso del switch
             atras = false;
 
             switch (opcionPrincipal) {
 
-                case 1:
+                case 1: // Inicio de sesión como Bibliotecario
 
-                    while (!atras) {
+                    Bibliotecario bibliotecario = Bibliotecario.iniciarSesion(listaDePersonas);
 
-                        ClearTerminal.clearTerminal();
+                    if (bibliotecario != null) {
 
-                        System.out.println("------------ Gestionar Libros ------------");
-                        System.out.println("1. Añadir libro");
-                        System.out.println("2. Eliminar libro");
-                        System.out.println("3. Buscar libro por ISBN");
-                        System.out.println("4. Buscar libro por título");
-                        System.out.println("5. Mostrar todos los libros");
-                        System.out.println("6. Mostrar libros disponibles");
-                        System.out.println("7. Atrás");
-                        System.out.println("------------------------------------------ \n");
+                        while (!atras) {
 
-                        System.out.print("Elige una de las opciones disponibles: ");
-                        opcion = sc.nextInt();
-                        System.out.println();
+                            ClearTerminal.clearTerminal();
 
-                        switch (opcion) {
+                            System.out.println("Sesión iniciada como: " + bibliotecario.getNombre() + " "
+                                    + bibliotecario.getPrimerApellido());
+                            System.out.println("Hora: " + horaActual.getHour() + ":" + horaActual.getMinute() + "\n");
 
-                            case 1:
+                            System.out.println(
+                                    "-------------- Opciones de " + bibliotecario.getNombre() + " --------------");
+                            System.out.println("1. Gestionar libros");
+                            System.out.println("2. Gestionar personas");
+                            System.out.println("3. Atrás");
+                            System.out.println("------------------------------------------------ \n");
 
-                                Libro.añadirLibro(listaLibros);
-                                Sleep.pause(3000);
-                                ClearTerminal.clearTerminal();
-                                break;
+                            // Restablecer la variable a false en cada caso del switch
+                            atrasAnidado = false;
 
-                            case 2:
+                            try {
 
-                                Libro.eliminarLibro(listaLibros);
-                                Sleep.pause(3000);
-                                ClearTerminal.clearTerminal();
-                                break;
+                                System.out.print("Elige una de las opciones disponibles: ");
+                                opcion = sc.nextInt();
+                                System.out.println();
 
-                            case 3:
+                            } catch (InputMismatchException e) {
 
-                                Libro.buscarLibroISBN(listaLibros);
-                                Sleep.pause(3000);
-                                ClearTerminal.clearTerminal();
-                                break;
+                                System.out.println("Opción invalida, debes ingresar un número");
+                                Sleep.pause(2000);
+                                sc.nextLine(); // limpiamos el scanner para evitar un loop infinito
+                                continue; // volvemos al inicio del loop
+                            }
 
-                            case 4:
+                            switch (opcion) {
 
-                                Libro.buscarLibroTitulo(listaLibros);
-                                Sleep.pause(3000);
-                                ClearTerminal.clearTerminal();
-                                break;
+                                case 1: // Opciones del Bibliotecario - Gestionar libros
 
-                            case 5:
-
-                                biblioteca.mostrarLibros(listaLibros);
-                                Sleep.pause(3000);
-                                ClearTerminal.clearTerminal();
-                                break;
-
-                            case 6:
-
-                                biblioteca.mostrarLibrosDisponibles(listaLibros);
-                                Sleep.pause(3000);
-                                ClearTerminal.clearTerminal();
-                                break;
-
-                            case 7:
-
-                                atras = true;
-                                ClearTerminal.clearTerminal();
-                                break;
-
-                            default:
-                                System.out.println("Opción invalida, vuelve a intentarlo");
-                                break;
-                        }
-                    }
-
-                    break;
-
-                case 2:
-
-                    while (!atras) {
-
-                        ClearTerminal.clearTerminal();
-
-                        System.out.println("------------ Gestionar Personas ------------");
-                        System.out.println("1. Añadir bibliotecario");
-                        System.out.println("2. Añadir usuario");
-                        System.out.println("3. Mostrar bibliotecarios");
-                        System.out.println("4. Mostrar usuarios");
-                        System.out.println("5. Eliminar bibliotecario");
-                        System.out.println("6. Eliminar usuario");
-                        System.out.println("7. Atrás");
-                        System.out.println("-------------------------------------------- \n");
-
-                        System.out.print("Elige una de las opciones disponibles: ");
-                        opcion = sc.nextInt();
-                        System.out.println();
-
-                        switch (opcion) {
-
-                            case 1:
-
-                                Bibliotecario.añadirBibliotecario(listaDePersonas);
-                                Sleep.pause(3000);
-                                ClearTerminal.clearTerminal();
-                                break;
-
-                            case 2:
-
-                                Usuario.añadirUsuario(listaDePersonas);
-                                Sleep.pause(3000);
-                                ClearTerminal.clearTerminal();
-                                break;
-
-                            case 3:
-
-                                Bibliotecario.mostrarBibliotecarios(listaDePersonas);
-                                Sleep.pause(3000);
-                                ClearTerminal.clearTerminal();
-                                break;
-
-                            case 4:
-
-                                Usuario.mostrarUsuarios(listaDePersonas);
-                                Sleep.pause(3000);
-                                ClearTerminal.clearTerminal();
-                                break;
-
-                            case 5:
-
-                                Bibliotecario.eliminarBibliotecario(listaDePersonas);
-                                Sleep.pause(3000);
-                                ClearTerminal.clearTerminal();
-                                break;
-
-                            case 6:
-
-                                Usuario.eliminarUsuario(listaDePersonas);
-                                Sleep.pause(3000);
-                                ClearTerminal.clearTerminal();
-                                break;
-
-                            case 7:
-
-                                atras = true;
-                                ClearTerminal.clearTerminal();
-                                break;
-
-                            default:
-
-                                System.out.println("Opción invalida, vuelve a intentarlo");
-                                break;
-                        }
-                    }
-
-                    break;
-
-                case 3:
-
-                    while (!atras) {
-
-                        ClearTerminal.clearTerminal();
-
-                        System.out.println("------------ Iniciar Sesión ------------");
-                        System.out.println("1. Iniciar sesión para bibliotecario");
-                        System.out.println("2. Iniciar sesión para usuarios");
-                        System.out.println("3. Atrás");
-                        System.out.println("---------------------------------------- \n");
-
-                        System.out.print("Elige una de las opciones disponibles: ");
-                        opcion = sc.nextInt();
-                        System.out.println();
-
-                        // Restablecer la variable a false para no volver de golpe al menú principal
-                        atras = false;
-
-                        switch (opcion) {
-
-                            case 1:
-
-                                Bibliotecario bibliotecario = Bibliotecario.iniciarSesion(listaDePersonas);
-
-                                if (bibliotecario != null) {
-
-                                    while (!atras) {
+                                    while (!atrasAnidado) {
 
                                         ClearTerminal.clearTerminal();
 
                                         System.out.println("Sesión iniciada como: " + bibliotecario.getNombre() + " "
-                                                + bibliotecario.getPrimerApellido() + "\n");
+                                                + bibliotecario.getPrimerApellido());
+                                        System.out.println(
+                                                "Hora: " + horaActual.getHour() + ":" + horaActual.getMinute() + "\n");
 
-                                        System.out.println("------------ Reservas ------------");
-                                        System.out.println("1. Reservar libro");
-                                        System.out.println("2. Devolver libro");
-                                        System.out.println("3. Atrás");
-                                        System.out.println("----------------------------------- \n");
+                                        System.out.println("------------ Gestionar Libros ------------");
+                                        System.out.println("1. Añadir libro");
+                                        System.out.println("2. Eliminar libro");
+                                        System.out.println("3. Buscar libro por ISBN");
+                                        System.out.println("4. Buscar libro por título");
+                                        System.out.println("5. Mostrar todos los libros");
+                                        System.out.println("6. Mostrar libros disponibles");
+                                        System.out.println("7. Reservar libro");
+                                        System.out.println("8. Devolver libro");
+                                        System.out.println("9. Atrás");
+                                        System.out.println("------------------------------------------ \n");
 
-                                        System.out.print("Elige una de las opciones disponibles: ");
-                                        opcion = sc.nextInt();
-                                        System.out.println();
+                                        try {
+
+                                            System.out.print("Elige una de las opciones disponibles: ");
+                                            opcion = sc.nextInt();
+                                            System.out.println();
+
+                                        } catch (InputMismatchException e) {
+
+                                            System.out.println("Opción invalida, debes ingresar un número");
+                                            Sleep.pause(2000);
+                                            sc.nextLine(); // limpiamos el scanner para evitar un loop infinito
+                                            continue; // volvemos al inicio del loop
+                                        }
 
                                         switch (opcion) {
 
                                             case 1:
 
+                                                Libro.añadirLibro(listaLibros);
                                                 Sleep.pause(3000);
                                                 ClearTerminal.clearTerminal();
                                                 break;
 
                                             case 2:
 
+                                                Libro.eliminarLibro(listaLibros);
                                                 Sleep.pause(3000);
                                                 ClearTerminal.clearTerminal();
                                                 break;
 
                                             case 3:
 
-                                                atras = true;
+                                                Libro.buscarLibroISBN(listaLibros);
+                                                Sleep.pause(3000);
+                                                ClearTerminal.clearTerminal();
+                                                break;
+
+                                            case 4:
+
+                                                Libro.buscarLibroTitulo(listaLibros);
+                                                Sleep.pause(3000);
+                                                ClearTerminal.clearTerminal();
+                                                break;
+
+                                            case 5:
+
+                                                biblioteca.mostrarLibros(listaLibros);
+                                                Sleep.pause(3000);
+                                                ClearTerminal.clearTerminal();
+                                                break;
+
+                                            case 6:
+
+                                                biblioteca.mostrarLibrosDisponibles(listaLibros);
+                                                Sleep.pause(3000);
+                                                ClearTerminal.clearTerminal();
+                                                break;
+
+                                            case 7: // Añadir reservar libro
+
+                                                Sleep.pause(3000);
+                                                ClearTerminal.clearTerminal();
+                                                break;
+
+                                            case 8: // Añadir devolver libro
+
+                                                Sleep.pause(3000);
+                                                ClearTerminal.clearTerminal();
+                                                break;
+
+                                            case 9:
+
+                                                atrasAnidado = true;
                                                 ClearTerminal.clearTerminal();
                                                 break;
 
                                             default:
 
                                                 System.out.println("Opción invalida, vuelve a intentarlo");
+                                                Sleep.pause(3000);
                                                 break;
                                         }
                                     }
 
-                                    break;
+                                    break; // Break Case 1 - Opciones Bibliotecario
 
-                                } else {
+                                case 2: // Opciones del bibliotecario - Gestionar Personas
 
-                                    System.out.println("Error de inicio de sesión");
-                                    ClearTerminal.clearTerminal();
-                                    break;
-                                }
-
-                            case 2:
-
-                                Usuario usuario = Usuario.iniciarSesion(listaDePersonas);
-
-                                if (usuario != null) {
-
-                                    while (!atras) {
+                                    while (!atrasAnidado) {
 
                                         ClearTerminal.clearTerminal();
 
-                                        System.out.println("Sesión iniciada como: " + usuario.getNombre() + " "
-                                                + usuario.getPrimerApellido() + "\n");
+                                        System.out.println("Sesión iniciada como: " + bibliotecario.getNombre() + " "
+                                                + bibliotecario.getPrimerApellido());
+                                        System.out.println(
+                                                "Hora: " + horaActual.getHour() + ":" + horaActual.getMinute() + "\n");
 
-                                        System.out.println("------------ Usuario ------------");
-                                        System.out.println("1. Saludar");
-                                        System.out.println("2. Atrás");
-                                        System.out.println("--------------------------------- \n");
+                                        System.out.println("------------ Gestionar Personas ------------");
+                                        System.out.println("1. Añadir bibliotecario");
+                                        System.out.println("2. Añadir usuario");
+                                        System.out.println("3. Mostrar bibliotecarios");
+                                        System.out.println("4. Mostrar usuarios");
+                                        System.out.println("5. Eliminar bibliotecario");
+                                        System.out.println("6. Eliminar usuario");
+                                        System.out.println("7. Atrás");
+                                        System.out.println("-------------------------------------------- \n");
 
-                                        System.out.print("Elige una de las opciones disponibles: ");
-                                        opcion = sc.nextInt();
-                                        System.out.println();
+                                        try {
+
+                                            System.out.print("Elige una de las opciones disponibles: ");
+                                            opcion = sc.nextInt();
+                                            System.out.println();
+
+                                        } catch (InputMismatchException e) {
+
+                                            System.out.println("Opción invalida, debes ingresar un número");
+                                            Sleep.pause(2000);
+                                            sc.nextLine(); // limpiamos el scanner para evitar un loop infinito
+                                            continue; // volvemos al inicio del loop
+                                        }
 
                                         switch (opcion) {
 
                                             case 1:
 
-                                                usuario.saludar();
+                                                Bibliotecario.añadirBibliotecario(listaDePersonas);
                                                 Sleep.pause(3000);
                                                 ClearTerminal.clearTerminal();
                                                 break;
 
                                             case 2:
 
-                                                atras = true;
+                                                Usuario.añadirUsuario(listaDePersonas);
+                                                Sleep.pause(3000);
+                                                ClearTerminal.clearTerminal();
+                                                break;
+
+                                            case 3:
+
+                                                Bibliotecario.mostrarBibliotecarios(listaDePersonas);
+                                                Sleep.pause(3000);
+                                                ClearTerminal.clearTerminal();
+                                                break;
+
+                                            case 4:
+
+                                                Usuario.mostrarUsuarios(listaDePersonas);
+                                                Sleep.pause(3000);
+                                                ClearTerminal.clearTerminal();
+                                                break;
+
+                                            case 5:
+
+                                                Bibliotecario.eliminarBibliotecario(listaDePersonas);
+                                                Sleep.pause(3000);
+                                                ClearTerminal.clearTerminal();
+                                                break;
+
+                                            case 6:
+
+                                                Usuario.eliminarUsuario(listaDePersonas);
+                                                Sleep.pause(3000);
+                                                ClearTerminal.clearTerminal();
+                                                break;
+
+                                            case 7:
+
+                                                atrasAnidado = true;
                                                 ClearTerminal.clearTerminal();
                                                 break;
 
                                             default:
 
                                                 System.out.println("Opción invalida, vuelve a intentarlo");
+                                                Sleep.pause(3000);
                                                 break;
                                         }
                                     }
 
-                                    break;
+                                    break; // Break Case 2 - Opciones del Bibliotecario
 
-                                } else {
+                                case 3:
 
-                                    System.out.println("Error de inicio de sesión");
+                                    atras = true;
                                     ClearTerminal.clearTerminal();
                                     break;
-                                }
 
-                            case 3:
+                                default:
 
-                                atras = true;
-                                ClearTerminal.clearTerminal();
-                                break;
-
-                            default:
-                                System.out.println("Opción invalida, vuelve a intentarlo");
-                                break;
-
+                                    System.out.println("Opción invalida, vuelve a intentarlo");
+                                    Sleep.pause(3000);
+                                    break;
+                            }
                         }
+
+                        break;
+
+                    } else {
+
+                        System.out.println("Error de inicio de sesión");
+                        ClearTerminal.clearTerminal();
+                        break;
                     }
 
-                    break;
+                case 2: // Inicio de sesión como Usuario
 
-                case 5:
+                    Usuario usuario = Usuario.iniciarSesion(listaDePersonas);
+
+                    if (usuario != null) {
+
+                        while (!atras) {
+
+                            ClearTerminal.clearTerminal();
+
+                            System.out.println(
+                                    "Sesión iniciada como: " + usuario.getNombre() + " " + usuario.getPrimerApellido());
+                            System.out.println("Hora: " + horaActual.getHour() + ":" + horaActual.getMinute() + "\n");
+
+                            System.out.println("------------ Opciones de " + usuario.getNombre() + " ----------");
+                            System.out.println("1. Saludar");
+                            System.out.println("2. Atrás");
+                            System.out.println("------------------------------------------- \n");
+
+                            // Restablecer la variable a false en cada caso del switch
+                            atrasAnidado = false;
+
+                            try {
+
+                                System.out.print("Elige una de las opciones disponibles: ");
+                                opcion = sc.nextInt();
+                                System.out.println();
+
+                            } catch (InputMismatchException e) {
+
+                                System.out.println("Opción invalida, debes ingresar un número");
+                                Sleep.pause(2000);
+                                sc.nextLine(); // limpiamos el scanner para evitar un loop infinito
+                                continue; // volvemos al inicio del loop
+                            }
+
+                            switch (opcion) {
+
+                                case 1:
+
+                                    usuario.saludar();
+                                    Sleep.pause(3000);
+                                    ClearTerminal.clearTerminal();
+                                    break;
+
+                                case 2:
+
+                                    atras = true;
+                                    ClearTerminal.clearTerminal();
+                                    break;
+
+                                default:
+
+                                    System.out.println("Opción invalida, vuelve a intentarlo");
+                                    break;
+                            }
+                        }
+
+                    } else {
+
+                        System.out.println("Error de inicio de sesión");
+                        ClearTerminal.clearTerminal();
+                        break;
+                    }
+                
+                case 4:
 
                     salir = true;
-                    ClearTerminal.clearTerminal();
                     break;
 
-            } // Switch principal
-        } // While principal
+                default: // Default principal
+                    System.out.println("Opción invalida, vuelve a intentarlo");
+                    Sleep.pause(3000);
+                    break;
+
+            } // Cierre del Switch principal
+        } // Cierre del While Principal
         sc.close();
-    } // Cierre Main
+    } // Cierre del Main
 } // Cierre Clase
