@@ -87,7 +87,7 @@ public class Biblioteca {
 
         if (listaLibros.size() == 0) {
 
-            System.out.println("No hay librs en la Biblioteca");
+            System.out.println("No hay libros en la Biblioteca");
             System.out.println("Añade alguno para poder ver sus datos");
             
         }
@@ -103,19 +103,12 @@ public class Biblioteca {
 
                 System.out.println(libro);
                 
-            }
-
-            
+            }     
         } 
-
     }
 
     @Override
     public String toString() {
         return "Nombre: " + nombre + ", Lista de Libros: " + listaLibros.size() + ", Lista de Personal: " + listaPersonas.size();
-    }
-
-    
-
-    
+    }    
 }
