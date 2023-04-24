@@ -286,6 +286,17 @@ public class Bibliotecario extends Persona {
     }
 
     @Override
+    public void cambiarContraseña() {
+
+        System.out.print("Introduce la nueva contraseña: ");
+        String nuevaContraseña = Libro.sc.nextLine();
+
+        setContraseña(nuevaContraseña);
+
+        System.out.println("Contraseña cambiada con éxito");
+    }
+
+    @Override
     public String toString() {
         return "Bibliotecario Puesto de trabajo: " + puestoTrabajo + ", NIF: " + nif + ", Contraseña: " + contraseña;
     }
