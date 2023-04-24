@@ -23,7 +23,7 @@ public class Usuario extends Persona {
         this.direccion = direccion;
         this.codigoPostal = codigoPostal;
         this.email = email;
-        this.listaReserva = new ArrayList<>(Arrays.asList(new Reserva[1]));    
+        this.listaReserva = new ArrayList<Reserva>();;    
     }
 
     // Constructor copia
@@ -95,6 +95,7 @@ public class Usuario extends Persona {
         System.out.print("Introduce el correo electrónico: ");
         email = Persona.sc.nextLine();
 
+        listaReserva = new ArrayList<Reserva>();
     }
 
     public static void añadirUsuario(ArrayList<Persona> listaDePersonas) {
