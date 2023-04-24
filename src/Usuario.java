@@ -166,6 +166,7 @@ public class Usuario extends Persona {
                 } else {
 
                     System.out.println("Teléfono o email incorrectos. Intentalo de nuevo...");
+                    Sleep.pause(3000);
 
                 }
             }
@@ -175,9 +176,42 @@ public class Usuario extends Persona {
 
 
     public void añadirLibroReservado(Reserva reserva) {
-
         listaReserva.add(reserva);
+    }
 
+    public void eliminarLibroReservado(Reserva reserva) {
+
+        if (reserva != null) {
+            listaReserva.remove(reserva);
+        } else {
+            System.out.println("No hay ninguna reserva con ese ISBN");
+        }
+    }
+
+    public Reserva buscarReservaPorISBN(String isbn) {
+        for (Reserva reserva : listaReserva) {
+            if (reserva != null) {
+                if (reserva.getLibro().getISBN().equals(isbn)) {
+                    return reserva;
+                }
+            }
+        }
+        return new Reserva(); 
+    }
+    
+
+    public void mostrarLibrosReservados() {
+
+        if (listaReserva.size() == 0 || listaReserva == null) {
+
+            System.out.println("No hay reservas hechas");
+        }
+
+        for (Reserva reserva : listaReserva) {
+
+            System.out.println(reserva);
+            
+        }
     }
 
     public void saludar() {
