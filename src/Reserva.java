@@ -37,16 +37,17 @@ public class Reserva {
     }
 
     public void setFechaHora() {
-        this.fechaHora = LocalDateTime.now();
+        LocalDateTime ahora = LocalDateTime.now();
+        this.fechaHora = LocalDateTime.of(ahora.getYear(), ahora.getMonth(), ahora.getDayOfMonth(), ahora.getHour(), ahora.getMinute());
     }
+    
 
     public static Reserva crearReserva(Libro libro) {
-
+        
         Reserva reserva = new Reserva();
         reserva.setLibro(libro);
         reserva.setFechaHora();
         return reserva;
-
     }
 
     @Override
