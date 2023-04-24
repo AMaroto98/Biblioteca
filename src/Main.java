@@ -15,14 +15,15 @@ public class Main {
         LocalTime horaActual = LocalTime.now();
 
         // Añado un bibliotecario para poder Iniciar Sesión la primera vez
-        Bibliotecario administrador = new Bibliotecario("Chicote", "Chicote", "Chicote", 35, "Cocinero", "12345678A",
-                "12345678");
+        Bibliotecario administrador = new Bibliotecario("Chicote", "Chicote", "Chicote", 35, "Cocinero", "12345678A","12345678");
         listaDePersonas.add((Persona) administrador);
 
         // Añado un usuario para poder hacer pruebas
-        Usuario usuarioPruebas = new Usuario("Antonio", "Maroto", "Blasco", 25, "655303348", "Calle Piruleta", "07011",
-                "antoniomarotoblasco@gmail.com");
+        Usuario usuarioPruebas = new Usuario("Antonio", "Maroto", "Blasco", 25, "655303348", "Calle Piruleta", "07011","antonio");
         listaDePersonas.add((Persona) usuarioPruebas);
+
+        Libro libro = new Libro("1", "W", "W", "W", 1, 1, false);
+        listaLibros.add(libro);
 
         // Creo la biblioteca del Borja Moll
         Biblioteca biblioteca = new Biblioteca("Borja Moll", listaLibros, listaDePersonas);
@@ -78,12 +79,10 @@ public class Main {
 
                             ClearTerminal.clearTerminal();
 
-                            System.out.println("Sesión iniciada como: " + bibliotecario.getNombre() + " "
-                                    + bibliotecario.getPrimerApellido());
+                            System.out.println("Sesión iniciada como: " + bibliotecario.getNombre() + " " + bibliotecario.getPrimerApellido());
                             System.out.println("Hora: " + horaActual.getHour() + ":" + horaActual.getMinute() + "\n");
 
-                            System.out.println(
-                                    "-------------- Opciones de " + bibliotecario.getNombre() + " --------------");
+                            System.out.println("-------------- Opciones de " + bibliotecario.getNombre() + " --------------");
                             System.out.println("1. Gestionar libros");
                             System.out.println("2. Gestionar personas");
                             System.out.println("3. Atrás");
@@ -114,10 +113,8 @@ public class Main {
 
                                         ClearTerminal.clearTerminal();
 
-                                        System.out.println("Sesión iniciada como: " + bibliotecario.getNombre() + " "
-                                                + bibliotecario.getPrimerApellido());
-                                        System.out.println(
-                                                "Hora: " + horaActual.getHour() + ":" + horaActual.getMinute() + "\n");
+                                        System.out.println("Sesión iniciada como: " + bibliotecario.getNombre() + " " + bibliotecario.getPrimerApellido());
+                                        System.out.println("Hora: " + horaActual.getHour() + ":" + horaActual.getMinute() + "\n");
 
                                         System.out.println("------------ Gestionar Libros ------------");
                                         System.out.println("1. Añadir libro");
@@ -189,14 +186,16 @@ public class Main {
                                                 ClearTerminal.clearTerminal();
                                                 break;
 
-                                            case 7: // Añadir reservar libro
+                                            case 7:
 
+                                                bibliotecario.reservarLibro(listaDePersonas, listaLibros);
                                                 Sleep.pause(3000);
                                                 ClearTerminal.clearTerminal();
                                                 break;
 
-                                            case 8: // Añadir devolver libro
+                                            case 8:
 
+                                                bibliotecario.devolverLibro(listaDePersonas, listaLibros);
                                                 Sleep.pause(3000);
                                                 ClearTerminal.clearTerminal();
                                                 break;
@@ -223,10 +222,8 @@ public class Main {
 
                                         ClearTerminal.clearTerminal();
 
-                                        System.out.println("Sesión iniciada como: " + bibliotecario.getNombre() + " "
-                                                + bibliotecario.getPrimerApellido());
-                                        System.out.println(
-                                                "Hora: " + horaActual.getHour() + ":" + horaActual.getMinute() + "\n");
+                                        System.out.println("Sesión iniciada como: " + bibliotecario.getNombre() + " " + bibliotecario.getPrimerApellido());
+                                        System.out.println("Hora: " + horaActual.getHour() + ":" + horaActual.getMinute() + "\n");
 
                                         System.out.println("------------ Gestionar Personas ------------");
                                         System.out.println("1. Añadir bibliotecario");
@@ -345,17 +342,14 @@ public class Main {
 
                             ClearTerminal.clearTerminal();
 
-                            System.out.println(
-                                    "Sesión iniciada como: " + usuario.getNombre() + " " + usuario.getPrimerApellido());
+                            System.out.println("Sesión iniciada como: " + usuario.getNombre() + " " + usuario.getPrimerApellido());
                             System.out.println("Hora: " + horaActual.getHour() + ":" + horaActual.getMinute() + "\n");
 
                             System.out.println("------------ Opciones de " + usuario.getNombre() + " ----------");
                             System.out.println("1. Saludar");
-                            System.out.println("2. Atrás");
+                            System.out.println("2. Mostrar libros reservados");
+                            System.out.println("3. Atrás");
                             System.out.println("------------------------------------------- \n");
-
-                            // Restablecer la variable a false en cada caso del switch
-                            atrasAnidado = false;
 
                             try {
 
@@ -382,6 +376,13 @@ public class Main {
 
                                 case 2:
 
+                                    usuario.mostrarLibrosReservados();
+                                    Sleep.pause(3000);
+                                    ClearTerminal.clearTerminal();
+                                    break;
+
+                                case 3:
+
                                     atras = true;
                                     ClearTerminal.clearTerminal();
                                     break;
@@ -399,7 +400,7 @@ public class Main {
                         ClearTerminal.clearTerminal();
                         break;
                     }
-                
+
                 case 4:
 
                     salir = true;
