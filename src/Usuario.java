@@ -202,7 +202,7 @@ public class Usuario extends Persona {
 
     public void mostrarLibrosReservados() {
 
-        if (listaReserva.size() == 0 || listaReserva == null) {
+        if (listaReserva == null ||listaReserva.size() == 0) {
 
             System.out.println("No hay reservas hechas");
         }
@@ -216,6 +216,17 @@ public class Usuario extends Persona {
 
     public void saludar() {
         System.out.println("Hola, vuelve por donde has venido");
+    }
+
+    @Override
+    public void cambiarContraseña() {
+
+        System.out.print("Introduce la nueva contraseña: ");
+        String contraseña = Libro.sc.nextLine();
+
+        setEmail(contraseña);
+
+        System.out.println("Contraseña cambiada con éxito");
     }
 
     @Override
