@@ -418,6 +418,13 @@ public class Main {
                         ClearTerminal.clearTerminal();
                         break;
                     }
+                    
+                case 3:
+
+                    Repositorio.abrirRepositorio();
+                    Sleep.pause(3000);
+                    ClearTerminal.clearTerminal();
+                    break;
 
                 case 4:
 
