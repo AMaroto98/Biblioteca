@@ -92,7 +92,7 @@ public abstract class Persona {
 
     }
 
-    // public abstract void cambiarContraseña();
+    public abstract void cambiarContraseña();
 
     @Override
     public String toString() {
