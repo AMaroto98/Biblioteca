@@ -85,7 +85,8 @@ public class Main {
                             System.out.println("-------------- Opciones de " + bibliotecario.getNombre() + " --------------");
                             System.out.println("1. Gestionar libros");
                             System.out.println("2. Gestionar personas");
-                            System.out.println("3. Atrás");
+                            System.out.println("3. Cambiar contraseña");
+                            System.out.println("4. Atrás");
                             System.out.println("------------------------------------------------ \n");
 
                             // Restablecer la variable a false en cada caso del switch
@@ -308,8 +309,15 @@ public class Main {
                                     }
 
                                     break; // Break Case 2 - Opciones del Bibliotecario
+                                
+                                case 3: 
 
-                                case 3:
+                                    bibliotecario.cambiarContraseña();
+                                    Sleep.pause(3000);
+                                    ClearTerminal.clearTerminal();
+                                    break;
+
+                                case 4:
 
                                     atras = true;
                                     ClearTerminal.clearTerminal();
@@ -348,7 +356,8 @@ public class Main {
                             System.out.println("------------ Opciones de " + usuario.getNombre() + " ----------");
                             System.out.println("1. Saludar");
                             System.out.println("2. Mostrar libros reservados");
-                            System.out.println("3. Atrás");
+                            System.out.println("3. Cambiar contraseña");
+                            System.out.println("4. Atrás");
                             System.out.println("------------------------------------------- \n");
 
                             try {
@@ -380,8 +389,15 @@ public class Main {
                                     Sleep.pause(3000);
                                     ClearTerminal.clearTerminal();
                                     break;
-
+                                
                                 case 3:
+
+                                    usuario.cambiarContraseña();
+                                    Sleep.pause(3000);
+                                    ClearTerminal.clearTerminal();
+                                    break;
+
+                                case 4:
 
                                     atras = true;
                                     ClearTerminal.clearTerminal();
@@ -393,6 +409,8 @@ public class Main {
                                     break;
                             }
                         }
+
+                        break;
 
                     } else {
 
