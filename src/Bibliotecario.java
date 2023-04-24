@@ -206,31 +206,83 @@ public class Bibliotecario extends Persona {
                                 if (libro.isPrestado()) {
 
                                     System.out.println("Lo siento, el libro ya está reservado");
+                                    Sleep.pause(3000);
                                     
                                 } else {
 
                                     libro.setPrestado(true);
                                     Reserva reserva = Reserva.crearReserva(libro);
                                     usuario.añadirLibroReservado(reserva);
+                                    System.out.println("Libro reservado con éxito");
+                                    Sleep.pause(3000);
                                     
                                 }
-                                
                             }
-                            
                         }
-
                     }
 
-                    
-                }
-                
-            }
-            
-        }
+                } else {
 
+                    System.out.println("El teléfono o el email son incorrectos. Vuelve a intentarlo...");
+                    Sleep.pause(3000);
+                }
+            }
+        }
     }
 
-    public void devolverLibro() {
+    public void devolverLibro(ArrayList<Persona> listaDePersonas, ArrayList<Libro> listaLibros) {
+
+        System.out.print("Introduce un teléfono del usuario: ");
+        String telefono = Libro.sc.nextLine();
+
+        System.out.print("Introduce el correo electrónico del usuario: ");
+        String email = Libro.sc.nextLine();
+
+        for (Persona persona : listaDePersonas) {
+
+            if (persona instanceof Usuario) {
+
+                Usuario usuario = (Usuario) persona;
+
+                if ((telefono.equals(usuario.getTelefono())) && (email.equals(usuario.getEmail()))) {
+
+                    System.out.println("Los datos de usuario " + usuario.getNombre() + " son correctos \n");
+                    Sleep.pause(1000);
+
+                    System.out.print("Introduce el ISBN del libro que quieres devolver: ");
+                    String isbn = Libro.sc.nextLine();
+
+                    for (Reserva reserva : usuario.getListaReserva()) {
+
+                        if (reserva != null) {
+
+                            if (isbn.equals(reserva.getLibro().getISBN())) {
+
+                                if (reserva.getLibro().isPrestado()) {
+
+                                    reserva.getLibro().setPrestado(false);
+                                    usuario.eliminarLibroReservado(usuario.buscarReservaPorISBN(isbn));
+                                    System.out.println("Libro devuelto con éxito");
+                                    Sleep.pause(3000);
+                                    return;
+                                    
+                                } else {
+
+                                    System.out.println("Lo siento, no se ha podido devolver el libro");
+                                    Sleep.pause(3000);
+                                    
+                                }
+                            }
+                        }
+                    }
+
+                } else {
+
+                    System.out.println("El teléfono o el email son incorrectos. Vuelve a intentarlo...");
+                    Sleep.pause(3000);
+                }
+            }
+        }
     }
 
     @Override
