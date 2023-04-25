@@ -393,7 +393,7 @@ public class Main {
                                 case 2:
 
                                     usuario.mostrarLibrosReservados();
-                                    Sleep.pause(3000);
+                                    Sleep.pause(8000);
                                     ClearTerminal.clearTerminal();
                                     break;
                                 
