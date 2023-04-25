@@ -106,7 +106,7 @@ public class Bibliotecario extends Persona {
 
         for (Persona persona : listaDePersonas) {
             if (persona instanceof Bibliotecario) {
-                System.out.println(persona);
+                System.out.println(persona + "\n");
 
             }
         }
