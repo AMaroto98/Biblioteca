@@ -205,11 +205,14 @@ public class Usuario extends Persona {
         if (listaReserva == null ||listaReserva.size() == 0) {
 
             System.out.println("No hay reservas hechas");
+            return;
         }
 
         for (Reserva reserva : listaReserva) {
 
             System.out.println(reserva);
+
+            reserva.obtenerFechaDevolucion(reserva);
             
         }
     }
