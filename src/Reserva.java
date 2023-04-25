@@ -1,6 +1,7 @@
 import java.time.LocalDateTime;
+import java.util.Date;
 
-public class Reserva {
+public class Reserva implements Material {
 
     // Atributos de la clase
     private Libro libro;
@@ -51,8 +52,24 @@ public class Reserva {
     }
 
     @Override
+    public void obtenerFechaDevolucion(Reserva reserva) {
+
+        LocalDateTime fechaPrestamo = reserva.getFechaHora();
+
+        // Sumamos a la fecha del día de préstamo 1 mes.
+        LocalDateTime fechaDevolucion = fechaPrestamo.plusMonths(1);
+
+        System.out.println("La fecha de devolución es: " + fechaDevolucion);
+
+    }
+
+    @Override
+    public void mostrarInfoChula() {
+
+    }
+
+    @Override
     public String toString() {
         return "Reserva libro: " + libro + ", fechaHora: " + fechaHora;
     }
-
 }
