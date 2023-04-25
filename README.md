@@ -9,13 +9,20 @@
     - [Instalación](#instalación)
 
 - [Diseño](#diseño)
+- [Librerias utilizadas](#librerias-utilizadas)
+- [Conclusiones]
+    - [Mejoras]
 
+
+---
 
 ### Introducción
 
 Bienvenido/a al proyecto de la Biblioteca del Centro Borja Moll. Este trabajo ha sido llevado a cabo por Antonio Maroto durante el primer curso de DAW con el propósito de trabajar con la programación orientada a objetos en Java.
 
 El objetivo de este desafio era crear una biblioteca que tuviese usuarios y bibliotecarios y que cada uno de ellos pudiera realizar diferentes tareas. En el caso de los usuarios reservar libros y cambiar de contraseña y en el caso de los bibliotecarios buscar libros por título o ISBN, dar de alta nuevos usuarios y trabajadores, reservar y devolver libros para los usuarios y muchas cosas más.
+
+---
 
 ### Manual
 
@@ -52,7 +59,7 @@ $ code .
 
 ### Diseño
 
-Meter imagen diseño proyecto
+Meter imagen diseño proyecto!!!!
 
 El proyecto se encuentra situado en la carpeta `src`, dentro de ella podemos encontrar los diferentes archivos:
 
@@ -71,5 +78,24 @@ El proyecto se encuentra situado en la carpeta `src`, dentro de ella podemos enc
 
 ---
 
-### Librerias usadas
+### Librerias utilizadas
 
+Las librerias utilizadas en el proyecto son las siguientes:
+
+- **Java.util:**
+    - ArrayList: Es una clase que implementa la interfaz List en Java y proporciona una implementación de  tamaño dinámico de una matriz. Permite agregar, eliminar y buscar elementos en la lista.
+    - Iterator: Es una interfaz utilizada para recorrer elementos de una colección en Java. Proporciona métodos para verificar si hay más elementos, obtener el siguiente elemento y eliminar el elemento actual de la colección.
+    - InputMismatchException: Es una excepción lanzada por la clase Scanner cuando se encuentra un token en el flujo de entrada que no coincide con el tipo de dato esperado.
+    - List: Es una interfaz en Java que define un conjunto de operaciones para trabajar con listas ordenadas. Las clases ArrayList y LinkedList implementan esta interfaz.
+    - Scanner: Es una clase en Java que se utiliza para analizar entradas de datos y dividirlas en tokens.
+
+- **Java.time:**
+    - LocalTime: Es una clase en Java que representa una hora del día sin una fecha asociada. Proporciona métodos para obtener la hora, los minutos y los segundos, y realizar operaciones aritméticas con ellas.
+
+- **Java.awt:**
+    - Desktop: Es una clase en Java que proporciona acceso a características del sistema operativo relacionadas con el escritorio, como abrir archivos, navegar por la web y enviar correo electrónico.
+
+- **Java.net:**
+    - URI: Es una clase en Java que representa un Identificador de Recursos Uniforme (URI), que es una cadena de caracteres que identifica un recurso en la web. Proporciona métodos para analizar y construir URIs.
+
+---
