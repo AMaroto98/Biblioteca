@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Usuario extends Persona {
 
@@ -111,7 +110,7 @@ public class Usuario extends Persona {
 
         for (Persona persona : listaDePersonas) {
             if (persona instanceof Usuario) {
-                System.out.println(persona);
+                System.out.println(persona + "\n");
                 
             }
         }
@@ -216,7 +215,7 @@ public class Usuario extends Persona {
     }
 
     public void saludar() {
-        System.out.println("Hola, vuelve por donde has venido");
+        System.out.println("Hola, me llamo " + super.getNombre());
     }
 
     @Override
