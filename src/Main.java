@@ -15,7 +15,7 @@ public class Main {
         LocalTime horaActual = LocalTime.now();
 
         // Añado un bibliotecario para poder Iniciar Sesión la primera vez
-        Bibliotecario administrador = new Bibliotecario("Chicote", "Chicote", "Chicote", 35, "Cocinero", "12345678A","12345678");
+        Bibliotecario administrador = new Bibliotecario("Administrador", "Supremo", "Chicote", 35, "Cocinero", "12345678A","12345678");
         listaDePersonas.add((Persona) administrador);
 
         // Añado un usuario para poder hacer pruebas
@@ -126,7 +126,8 @@ public class Main {
                                         System.out.println("6. Mostrar libros disponibles");
                                         System.out.println("7. Reservar libro");
                                         System.out.println("8. Devolver libro");
-                                        System.out.println("9. Atrás");
+                                        System.out.println("9. Añadir copia de un libro");
+                                        System.out.println("0. Atrás");
                                         System.out.println("------------------------------------------ \n");
 
                                         try {
@@ -202,6 +203,12 @@ public class Main {
                                                 break;
 
                                             case 9:
+
+                                                Libro.añadirLibroCopia(listaLibros);
+                                                Sleep.pause(3000);
+                                                ClearTerminal.clearTerminal();
+
+                                            case 0:
 
                                                 atrasAnidado = true;
                                                 ClearTerminal.clearTerminal();
@@ -418,7 +425,7 @@ public class Main {
                         ClearTerminal.clearTerminal();
                         break;
                     }
-                    
+
                 case 3:
 
                     Repositorio.abrirRepositorio();
