@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
@@ -8,7 +9,7 @@ public class Libro {
 
     // Atributos de la clase
     private String isbn;
-    private String título;
+    private String titulo;
     private String autor;
     private String editorial;
     private int nCopias;
@@ -33,11 +34,11 @@ public class Libro {
     }
 
     // Constructor con todos los atributos
-    public Libro(String isbn, String título, String autor, String editorial, int nCopias, int nCopiasDisponibles,
+    public Libro(String isbn, String titulo, String autor, String editorial, int nCopias, int nCopiasDisponibles,
             boolean prestado) {
 
         this.isbn = isbn;
-        this.título = título;
+        this.titulo = titulo;
         this.autor = autor;
         this.editorial = editorial;
         setnCopias(nCopiasDisponibles);
@@ -50,7 +51,7 @@ public class Libro {
     public Libro(Libro original) {
 
         this.isbn = original.isbn;
-        this.título = original.título;
+        this.titulo = original.titulo;
         this.autor = original.autor;
         this.editorial = original.editorial;
         this.nCopias = original.nCopias;
@@ -63,8 +64,8 @@ public class Libro {
         return isbn;
     }
 
-    public String getTítulo() {
-        return título;
+    public String getTitulo() {
+        return titulo;
     }
 
     public String getAutor() {
@@ -96,8 +97,8 @@ public class Libro {
         this.isbn = isbn;
     }
 
-    public void setTítulo(String título) {
-        this.título = título;
+    public void settitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public void setAutor(String autor) {
@@ -137,13 +138,13 @@ public class Libro {
         System.out.print("Introduce el ISBN del libro: ");
         String isbn = sc.nextLine();
 
-        System.out.print("Introduce el título del libro: ");
-        String título = sc.nextLine();
+        System.out.print("Introduce el titulo del libro: ");
+        String titulo = sc.nextLine();
 
-        System.out.print("Introduce el autor del libro " + título + ": ");
+        System.out.print("Introduce el autor del libro " + titulo + ": ");
         String autor = sc.nextLine();
 
-        System.out.print("Introduce la editorial del libro " + título + ": ");
+        System.out.print("Introduce la editorial del libro " + titulo + ": ");
         String editorial = sc.nextLine();
 
         int nCopias = 0;
@@ -151,7 +152,7 @@ public class Libro {
 
         while (nCopias <= 0 || !esNumeroEntero) {
 
-            System.out.print("Introduce el número de copias del libro " + título + ": ");
+            System.out.print("Introduce el número de copias del libro " + titulo + ": ");
 
             try {
 
@@ -184,13 +185,12 @@ public class Libro {
             System.out.print("¿El libro que vas a añadir está disponible? (S/N) ");
             String respuesta = sc.nextLine();
 
-            if (respuesta.equals("S") || respuesta.equals("s") || respuesta.equals("Si") || respuesta.equals("SI")) {
+            if (respuesta.equalsIgnoreCase("S") || respuesta.equalsIgnoreCase("Si")) {
 
                 prestado = false;
                 salir = true;
 
-            } else if (respuesta.equals("N") || respuesta.equals("n") || respuesta.equals("No")
-                    || respuesta.equals("NO")) {
+            } else if (respuesta.equalsIgnoreCase("N") || respuesta.equalsIgnoreCase("No")) {
 
                 prestado = true;
                 salir = true;
@@ -202,7 +202,7 @@ public class Libro {
         }
 
         // Creamos un nuevo libro con el constructor anterior
-        Libro libro = new Libro(isbn, título, autor, editorial, nCopias, nCopias, prestado);
+        Libro libro = new Libro(isbn, titulo, autor, editorial, nCopias, nCopias, prestado);
 
         // Añadimos a la lista de libros el libro que hemos creado
         listaLibros.add(libro);
@@ -229,7 +229,7 @@ public class Libro {
             // Se usa Equals porque un String no es un tipo primitivo y == no funcionaría.
             if (isbn.equals(libro.getISBN())) {
                 i.remove();
-                System.out.println(libro.getTítulo() + " ha sido eliminado con éxito");
+                System.out.println(libro.getTitulo() + " ha sido eliminado con éxito");
             }
         }
     }
@@ -268,11 +268,13 @@ public class Libro {
         }
     }
 
-    public static void buscarLibroTitulo(List<Libro> listaLibros) {
+    public static Libro buscarLibroTitulo(List<Libro> listaLibros) {
 
         String tituloLibro = "";
+        boolean encontrado = false;
+        Libro libroEncontrado = null;
 
-        System.out.print("Introduce el título del libro que quieres buscar: ");
+        System.out.print("Introduce el titulo del libro que quieres buscar: ");
         String titulo = sc.nextLine();
 
         // Se crea un iterador para la lista
@@ -285,18 +287,96 @@ public class Libro {
             // Si el ISBN que ha introducido el usuario coincide con alguno de la lista de
             // libros lo elimina.
             // Se usa Equals porque un String no es un tipo primitivo y == no funcionaría.
-            if (titulo.equals(libro.getTítulo())) {
+            if (titulo.equalsIgnoreCase(libro.getTitulo())) {
 
-                tituloLibro = libro.getTítulo();
+                tituloLibro = libro.getTitulo();
                 System.out.println("Se ha encontrado el siguiente libro: " + tituloLibro);
+                encontrado = true;
+                libroEncontrado = libro;
             }
+        }
+
+        if (!encontrado) {
+            System.out.println("No se ha encontrado ningún libro con el siguiente titulo: " + titulo);
+        }
+
+        return libroEncontrado;
+    }
+
+    public static void añadirLibroCopia(ArrayList<Libro> listaLibros) {
+
+        Libro libroOriginal = buscarLibroTitulo(listaLibros);
+
+        // Si no se ha encontrado el libro original, mostramos un mensaje de error y salimos del método
+        if (libroOriginal != null) {
+
+            Libro libroCopia = new Libro(libroOriginal);
+            libroCopia.modificarDatos();
+            listaLibros.add(libroCopia);
+
+            System.out.println("Libro copiado añadido con exito");
+
+        } else {
+
+            System.out.println("No se ha podido añadir el libro");
+
+        }
+    }
+
+    public void modificarDatos() {
+
+        System.out.println("Datos para modificar: ISBN, titulo, autor, editorial, nCopias, nCopiasDisponibles.");
+        System.out.print("Introduce el dato que quieres modificar: ");
+        String dato = sc.nextLine();
+
+        if (dato.equalsIgnoreCase("isbn")) {
+
+            System.out.print("Introduce el ISBN nuevo: ");
+            String isbnNuevo = sc.nextLine();
+            this.isbn = isbnNuevo;
+            
+        } else if (dato.equalsIgnoreCase("título")) {
+
+            System.out.print("Introduce el título nuevo: ");
+            String tituloNuevo = sc.nextLine();
+            this.titulo = tituloNuevo;
+            
+        } else if (dato.equalsIgnoreCase("autor")) {
+
+            System.out.print("Introduce el autor nuevo: ");
+            String autorNuevo = sc.nextLine();
+            this.autor = autorNuevo;
+            
+        } else if (dato.equalsIgnoreCase("editorial")) {
+
+            System.out.print("Introduce el editorial nuevo: ");
+            String editorialNueva = sc.nextLine();
+            this.editorial = editorialNueva;
+            
+        } else if (dato.equalsIgnoreCase("nCopias")) {
+
+            System.out.print("Introduce el número de copias nuevo: ");
+            int nCopiasNuevo = sc.nextInt();
+            setnCopias(nCopiasNuevo);
+            this.nCopias = nCopiasNuevo;
+            
+        } else if (dato.equalsIgnoreCase("nCopiasDisponibles")) {
+
+            System.out.print("Introduce el número de copias disponibles nuevas: ");
+            int nCopiasDisponiblesNueva = sc.nextInt();
+            this.nCopiasDisponibles = nCopiasDisponiblesNueva;
+            
+        } else {
+
+            System.out.println("No hay ningún dato con el nombre: " + dato);
         }
 
     }
 
+
     @Override
     public String toString() {
-        return "Libro ISBN: " + isbn + ", título: " + título + ", autor: " + autor + ", editorial:" + editorial
+        return "Libro ISBN: " + isbn + ", titulo: " + titulo + ", autor: " + autor + ", editorial:" + editorial
                 + ", nCopias: " + nCopias + ", nCopiasDisponibles: " + nCopiasDisponibles + ", prestado: " + prestado;
     }
 }
