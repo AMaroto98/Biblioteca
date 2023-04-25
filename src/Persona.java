@@ -66,11 +66,9 @@ public abstract class Persona {
 
             System.out.print("Introduce una edad válida: ");
             edad = sc.nextInt();
-            
         }
-
         this.edad = edad;
-        
+    
         // vacio el buffer
         sc.nextLine();
     }
