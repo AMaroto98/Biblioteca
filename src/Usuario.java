@@ -213,7 +213,7 @@ public class Usuario extends Persona {
             System.out.println(reserva);
 
             reserva.obtenerFechaDevolucion(reserva);
-            
+            reserva.mostrarInfoChula();
         }
     }
 
