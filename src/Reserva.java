@@ -43,28 +43,31 @@ public class Reserva implements Material {
     
 
     public static Reserva crearReserva(Libro libro) {
-        
+        // Creo una reserva mediante el contructor vacio
         Reserva reserva = new Reserva();
+        // Setteo sus valores con el libro que el usuario quiere reservar y la hora actual
         reserva.setLibro(libro);
         reserva.setFechaHora();
+        // Devuelvo la reserva
         return reserva;
     }
 
     @Override
     public void obtenerFechaDevolucion(Reserva reserva) {
 
+        // Obtengo la fecha en la que se hizo la reserva
         LocalDateTime fechaPrestamo = reserva.getFechaHora();
 
         // Sumamos a la fecha del día de préstamo 1 mes.
         LocalDateTime fechaDevolucion = fechaPrestamo.plusMonths(1);
 
+        // Mostramos por pantalla cuando se tiene que devolver el libro
         System.out.println("La fecha de devolución es: " + fechaDevolucion);
-
     }
 
     @Override
     public void mostrarInfoChula() {
-
+        // Muestro la información mediante un salto de línea
         System.out.println("Libro: " + libro + "\n Fecha y Hora: " +  fechaHora);
     }
 

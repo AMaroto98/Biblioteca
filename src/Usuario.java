@@ -79,9 +79,10 @@ public class Usuario extends Persona {
 
     @Override
     public void solicitarDatosPersona() {
-
+        // Llamo al método de la clase padre 
         super.solicitarDatosPersona();
 
+        // Solicito el resto de datos de la clase usuario
         System.out.print("Introduce el número de teléfono: ");
         telefono = Persona.sc.nextLine();
 
@@ -94,22 +95,32 @@ public class Usuario extends Persona {
         System.out.print("Introduce el correo electrónico: ");
         email = Persona.sc.nextLine();
 
+        // Inicializo la lista de reservas para poder añadir
         listaReserva = new ArrayList<Reserva>();
     }
 
     public static void añadirUsuario(ArrayList<Persona> listaDePersonas) {
 
+        // Creo un usuario mediante el contructor vacío
         Usuario usuario = new Usuario();
+
+        // Modifico sus datos mediante el método solicitar datos
         usuario.solicitarDatosPersona();
+
+        // Añado el nuevo usuario a la lista de Personas
         listaDePersonas.add(usuario);
 
+        // Aviso de que todo ha ido bien
         System.out.println("Usuario " + usuario.getNombre() + " añadido con éxito");
     }
 
     public static void mostrarUsuarios(ArrayList<Persona> listaDePersonas) {
 
+        // Itero sobre la lista de personas
         for (Persona persona : listaDePersonas) {
+            // Copruebo que el que objeto que itera sea un usuario y no un bibliotecario
             if (persona instanceof Usuario) {
+                // Muestro el usuario por pantalla
                 System.out.println(persona + "\n");
                 
             }
@@ -142,48 +153,54 @@ public class Usuario extends Persona {
 
     public static Usuario iniciarSesion(ArrayList<Persona> listaDePersonas) {
 
+        // Solicito datos al usuario
         System.out.print("Introduce el teléfono: ");
         String telefono = Libro.sc.nextLine();
 
         System.out.print("Introduce el email: ");
         String email = Libro.sc.nextLine();
 
+        // Itero sobre la lista de personas
         for (Persona persona : listaDePersonas) {
-
+            // Compruebo que la persona sea un usuario
             if (persona instanceof Usuario) {
-
+                // Casting
                 Usuario usuario = (Usuario) persona;
-
+                // Compruebo que la información sea correcta
                 if ((telefono.equals(usuario.getTelefono())) && (email.equals(usuario.getEmail()))) {
 
                     System.out.println("Teléfono y email correctos");
                     Sleep.pause(2000);
                     System.out.println("Bienvenido " + usuario.getNombre() + " " + usuario.getPrimerApellido());
                     Sleep.pause(3000);
-
+                    // Devuelvo el usuario que mantendrá la sesión iniciada en el menú principal
                     return usuario;
  
                 } else {
-
+                    // Mensaje en el caso de que haya fallos
                     System.out.println("Teléfono o email incorrectos. Intentalo de nuevo...");
                     Sleep.pause(3000);
 
                 }
             }
         }
+        // Devuelvo null si ha habido problemas
         return null;
     }
 
 
     public void añadirLibroReservado(Reserva reserva) {
+        // Añado la reserva a la lista de reserva
         listaReserva.add(reserva);
     }
 
     public void eliminarLibroReservado(Reserva reserva) {
-
+        // compruebo que la reserva no sea null
         if (reserva != null) {
+            // elimino la reserva que entra por parámetro
             listaReserva.remove(reserva);
         } else {
+            // si la reserva es null se avisa al usuario
             System.out.println("No hay ninguna reserva con ese ISBN");
         }
     }
@@ -201,17 +218,17 @@ public class Usuario extends Persona {
     
 
     public void mostrarLibrosReservados() {
-
+        // si la lista de reserva es null o vacio se muestra el siguiente mensaje
         if (listaReserva == null ||listaReserva.size() == 0) {
 
             System.out.println("No hay reservas hechas");
             return;
         }
-
+        // Itero sobre las reservas
         for (Reserva reserva : listaReserva) {
-
+            // Muestro las reservas
             System.out.println(reserva);
-
+            // Muestro la fecha de devolución del libro 
             reserva.obtenerFechaDevolucion(reserva);
             reserva.mostrarInfoChula();
         }
@@ -223,10 +240,10 @@ public class Usuario extends Persona {
 
     @Override
     public void cambiarContraseña() {
-
+        // SOlicito información al usuario
         System.out.print("Introduce la nueva contraseña: ");
         String contraseña = Libro.sc.nextLine();
-
+        // Mediante el setEmail compruebo que su contraseña sea correcta
         setEmail(contraseña);
 
         System.out.println("Contraseña cambiada con éxito");

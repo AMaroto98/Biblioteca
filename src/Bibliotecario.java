@@ -65,11 +65,11 @@ public class Bibliotecario extends Persona {
 
     public void setContraseña(String contraseña) {
 
+        // Condición para que la contraseña que introduce el usuario tenga 8 carácteres de longuitud y no sea null.
         while (contraseña == null || contraseña.length() < 8) {
 
             System.out.print("Introduce una contraseña con almenos 8 carácteres: ");
             contraseña = Libro.sc.nextLine();
-
         }
 
         this.contraseña = contraseña;
@@ -78,11 +78,14 @@ public class Bibliotecario extends Persona {
     @Override
     public void solicitarDatosPersona() {
 
+        // Utilizo el método solicitador datos de su clase padre
         super.solicitarDatosPersona();
 
+        // Solicito los datos propios de esta clase
         System.out.print("Introduce el puesto de trabajo: ");
         puestoTrabajo = Persona.sc.nextLine();
 
+        // Con el setNIF y setContraseña verifico que los datos que se introducen son correctos
         System.out.print("Introduce el NIF: ");
         nif = Persona.sc.nextLine();
         setNIF(nif);
@@ -95,16 +98,25 @@ public class Bibliotecario extends Persona {
 
     public static void añadirBibliotecario(ArrayList<Persona> listaDePersonas) {
 
+        // Creo un bibliotecario con un constructor vacío
         Bibliotecario bibliotecario = new Bibliotecario();
+
+        // Con el método de solicitarDatos modifico los datos que se habrán preestablecido con el construcor vacio (null...)
         bibliotecario.solicitarDatosPersona();
+
+        // Añado el bibliotecario a la lista de personal de la biblioteca
         listaDePersonas.add(bibliotecario);
 
+        // Mensaje avisando al usuario
         System.out.println("Bibliotecario " + bibliotecario.getNombre() + " añadido con éxito");
     }
 
     public static void mostrarBibliotecarios(ArrayList<Persona> listaDePersonas) {
 
+        // Recorro toda la lista de persona de la biblioteca
         for (Persona persona : listaDePersonas) {
+            // Como la lista es de tipo Persona compruebo que la persona (que es el iterador del
+            // bucle) sea instanciado de bibliotecario. Si lo es se imprime, si no se lo salta.
             if (persona instanceof Bibliotecario) {
                 System.out.println(persona + "\n");
 
@@ -114,22 +126,24 @@ public class Bibliotecario extends Persona {
 
     public static void eliminarBibliotecario(ArrayList<Persona> listaDePersona) {
 
+        // Se solicita al usuario que introduzca el NIF del bibliotecario 
         System.out.print("Introduce el NIF del bibliotecario que quieres eliminar: ");
         String nif = Libro.sc.nextLine();
 
+        // Iteramos sobre la array de personas
         for (Persona persona : listaDePersona) {
-
+            // Comprobamos que sea bibliotecarios y no usuarios
             if (persona instanceof Bibliotecario) {
-
+                // Se hace casting 
                 Bibliotecario bibliotecario = (Bibliotecario) persona;
-
-                if (nif.equals(bibliotecario.getNif())) {
-
+                // Se compara el NIF
+                if (nif.equalsIgnoreCase(bibliotecario.getNif())) {
+                    // Se elimina si coincide
                     listaDePersona.remove(bibliotecario);
                     System.out.println("Bibliotecario " + bibliotecario.getNombre() + " ha sido eliminado con éxito");
 
                 } else {
-
+                    // Si no coincide se avisa al usario
                     System.out.println("No hay ningún bibliotecario con el NIF: " + nif);
                 }
             }
@@ -138,29 +152,33 @@ public class Bibliotecario extends Persona {
 
     public static Bibliotecario iniciarSesion(ArrayList<Persona> listaDePersonas) {
 
+        // Se solicitan los datos para iniciar sesión
         System.out.print("Introduce el NIF del bibliotecario: ");
         String nif = Libro.sc.nextLine();
 
         System.out.print("Introduce la contraseña: ");
         String contraseña = Libro.sc.nextLine();
-
+        // Iteramos sobre la lista de personas
         for (Persona persona : listaDePersonas) {
-
+            // Se comprueba que sea un bibliotecario
             if (persona instanceof Bibliotecario) {
-
+                // Casting
                 Bibliotecario bibliotecario = (Bibliotecario) persona;
 
+                // Se comprueba NIF y contraseña
                 if ((nif.equals(bibliotecario.getNif())) && (contraseña.equals(bibliotecario.getContraseña()))) {
 
+                    // Mensajes de que todo ha ido bien
                     System.out.println("NIF y contraseña correctos");
                     Sleep.pause(2000);
                     System.out.println("Bienvenido " + bibliotecario.getNombre() + " " + bibliotecario.getPrimerApellido());
                     Sleep.pause(3000);
 
+                    // Me devuelve el bibliotecario que mantendrá la sesión iniciada
                     return bibliotecario;
  
                 } else {
-
+                    // Aviso de algún error de inicio de sesión
                     System.out.println("NIF o contraseña incorrectos. Intentalo de nuevo...");
                     Sleep.pause(3000);
 
@@ -172,6 +190,7 @@ public class Bibliotecario extends Persona {
 
     public void reservarLibro(ArrayList<Persona> listaDePersonas, ArrayList<Libro> listaLibros) {
 
+        // Se solicitan los datos al usuario
         System.out.print("Introduce un teléfono del usuario: ");
         String telefono = Libro.sc.nextLine();
 
@@ -189,10 +208,11 @@ public class Bibliotecario extends Persona {
                     System.out.println("Los datos de usuario " + usuario.getNombre() + " son correctos \n");
                     Sleep.pause(1000);
 
+                    // Se comprueba que el usuario no tenga ya 5 libros reservados
                     if (usuario.getListaReserva().size() == 5) {
 
                         System.out.println("El número máximo de libros reservados a la vez es 5");
-                        break; //Quitar break;
+                        break;
                         
                     } else {
 
@@ -201,22 +221,30 @@ public class Bibliotecario extends Persona {
 
                         for (Libro libro : listaLibros) {
 
-                            if (isbn.equals(libro.getISBN())) {
+                            if (isbn.equalsIgnoreCase(libro.getISBN())) {
 
+                                // Se comprueba que el libro este disponible
                                 if (libro.isPrestado()) {
 
                                     System.out.println("Lo siento, el libro ya está reservado");
                                     Sleep.pause(3000);
                                     
                                 } else {
-
+                                    // Si esta disponible cambiamos el estado del prestado y creamos una reserva
                                     libro.setPrestado(true);
                                     Reserva reserva = Reserva.crearReserva(libro);
+                                    // Añadimos el libro reservado a la lista de reservas del usuario
                                     usuario.añadirLibroReservado(reserva);
+                                    // Mensaje avisando de que ha ido bien
                                     System.out.println("Libro reservado con éxito");
                                     Sleep.pause(3000);
                                     
                                 }
+
+                            } else {
+
+                                System.out.println("No se ha encontrado ningún libro con el siguiente ISBN: " + isbn);
+                                Sleep.pause(3000);
                             }
                         }
                     }
@@ -231,7 +259,7 @@ public class Bibliotecario extends Persona {
     }
 
     public void devolverLibro(ArrayList<Persona> listaDePersonas, ArrayList<Libro> listaLibros) {
-
+        // Se solicitan los datos al usuario
         System.out.print("Introduce un teléfono del usuario: ");
         String telefono = Libro.sc.nextLine();
 
@@ -272,9 +300,18 @@ public class Bibliotecario extends Persona {
                                     Sleep.pause(3000);
                                     
                                 }
+
+                            } else {
+
+                                System.out.println("No se encontrado ninguna reserva con el siguiente ISBN: " + isbn);
+                                Sleep.pause(3000);
                             }
+                        } else {
+
+                            System.out.println("No hay reservas efectuadas por este usuario");
+                            Sleep.pause(3000);
                         }
-                    }
+                    } 
 
                 } else {
 
@@ -288,9 +325,10 @@ public class Bibliotecario extends Persona {
     @Override
     public void cambiarContraseña() {
 
+        // Se solicita al usuario la nueva contraseña
         System.out.print("Introduce la nueva contraseña: ");
         String nuevaContraseña = Libro.sc.nextLine();
-
+        // Se verifica que la contraseña cumpla las condiciones
         setContraseña(nuevaContraseña);
 
         System.out.println("Contraseña cambiada con éxito");

@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public abstract class Persona {
@@ -61,19 +62,33 @@ public abstract class Persona {
     }
 
     public void setEdad(int edad) {
-
-        while (edad < 1) {
-
-            System.out.print("Introduce una edad válida: ");
-            edad = sc.nextInt();
+        boolean esEdadValida = false;
+    
+        while (!esEdadValida) {
+            try {
+                if (edad < 1 || edad > 100) {
+                    System.out.print("Introduce una edad válida: ");
+                    edad = sc.nextInt();
+                } else {
+                    esEdadValida = true;
+                }
+                
+            } catch (InputMismatchException e) {
+                System.out.print("Introduce una edad válida: ");
+                sc.nextLine(); // Limpiar el buffer después de una entrada inválida
+            }
         }
+    
         this.edad = edad;
     
-        // vacio el buffer
+        // vaciar el buffer después de la entrada exitosa
         sc.nextLine();
     }
+    
 
     public void solicitarDatosPersona() {
+
+        // Se solicitan todos los datos de la clase persona
 
         System.out.print("Introduce el nombre: ");
         nombre = sc.nextLine();
@@ -86,10 +101,11 @@ public abstract class Persona {
 
         System.out.print("Introduce la edad: ");
         edad = sc.nextInt();
-        setEdad(edad);
+        setEdad(edad); // Uso del setter para que la edad sea válida
 
     }
 
+    // Método abstracto que utilizarán las clases hijas
     public abstract void cambiarContraseña();
 
     @Override

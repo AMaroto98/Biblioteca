@@ -11,9 +11,6 @@ public class Menu {
         ArrayList<Libro> listaLibros = new ArrayList<>();
         ArrayList<Persona> listaDePersonas = new ArrayList<>();
 
-        // Librerias para la hora del Menú
-        LocalTime horaActual = LocalTime.now();
-
         // Añado un bibliotecario para poder Iniciar Sesión la primera vez
         Bibliotecario administrador = new Bibliotecario("Administrador", "Supremo", "Chicote", 35, "Cocinero", "12345678A","12345678");
         listaDePersonas.add((Persona) administrador);
@@ -22,19 +19,23 @@ public class Menu {
         Usuario usuarioPruebas = new Usuario("Antonio", "Maroto", "Blasco", 25, "655303348", "Calle Piruleta", "07011","antonio");
         listaDePersonas.add((Persona) usuarioPruebas);
 
+        // Añado un libro para hacer pruebas
         Libro libro = new Libro("1", "W", "W", "W", 1, 1, false);
         listaLibros.add(libro);
 
-        // Creo la biblioteca del Borja Moll
+        // Creo la biblioteca del Borja Moll y le paso las listas con datos
         Biblioteca biblioteca = new Biblioteca("Borja Moll", listaLibros, listaDePersonas);
 
-        // Creo Scanner y variables que usaré en el menú principal y anidados
+        // Creo Scanner y variables que usaré en el menú principal y menús anidados
         Scanner sc = new Scanner(System.in);
         boolean salir = false;
         boolean atras = false;
         boolean atrasAnidado = false;
         int opcionPrincipal;
         int opcion;
+
+        // variable para la hora del Menú
+        LocalTime horaActual = LocalTime.now();
 
         while (!salir) {
 

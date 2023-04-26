@@ -64,6 +64,7 @@ public class Biblioteca {
     // Métodos
     public void mostrarLibros(ArrayList<Libro> listaLibros) {
 
+        // Condición por si la lista de libros está vacia.
         if (listaLibros.size() == 0) {
 
             System.out.println("No hay librs en la Biblioteca");
@@ -71,36 +72,39 @@ public class Biblioteca {
             
         }
 
+        // Iterador para iterar en el siguiente bucle
         Iterator<Libro> i = listaLibros.iterator();
 
         // Bucle para recorrer la lista entera
         while (i.hasNext()) {
 
             Libro libro = i.next();
+            // Mostramos por pantalla los datos de los libros
             System.out.println(libro);
             
         } 
-        
     }
 
     public void mostrarLibrosDisponibles(ArrayList<Libro> listaLibros) {
-
+        
+        // Condición por si la lista de libros está vacia.
         if (listaLibros.size() == 0) {
 
             System.out.println("No hay libros en la Biblioteca");
             System.out.println("Añade alguno para poder ver sus datos");
             
         }
-
+        
+        // Se crea un iterador
         Iterator<Libro> i = listaLibros.iterator();
 
         // Bucle para recorrer la lista entera
         while (i.hasNext()) {
 
             Libro libro = i.next();
-            
+            // Comprobamos que el libro no haya sido prestado y esté en la biblioteca.
             if (libro.isPrestado() == false) {
-
+                // Mostramos el libro por pantalla
                 System.out.println(libro);
                 
             }     

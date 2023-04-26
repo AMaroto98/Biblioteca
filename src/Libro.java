@@ -169,6 +169,8 @@ public class Libro {
             } catch (InputMismatchException e) {
 
                 System.out.println("Por favor introduce un número entero valido");
+                // Parche
+                sc.nextLine();
 
             }
         }
@@ -185,11 +187,13 @@ public class Libro {
             System.out.print("¿El libro que vas a añadir está disponible? (S/N) ");
             String respuesta = sc.nextLine();
 
+            // Si el libro está disponible prestado es false.
             if (respuesta.equalsIgnoreCase("S") || respuesta.equalsIgnoreCase("Si")) {
 
                 prestado = false;
                 salir = true;
 
+            // Si no está disponible el libro es true.
             } else if (respuesta.equalsIgnoreCase("N") || respuesta.equalsIgnoreCase("No")) {
 
                 prestado = true;
@@ -204,9 +208,10 @@ public class Libro {
         // Creamos un nuevo libro con el constructor anterior
         Libro libro = new Libro(isbn, titulo, autor, editorial, nCopias, nCopias, prestado);
 
-        // Añadimos a la lista de libros el libro que hemos creado
+        // Añadimos a la lista de libros de la biblioteca del Borja Moll
         listaLibros.add(libro);
 
+        // Mensaje para que el usuario sepa que se ha añadido el libro
         System.out.println("Libro añadido con éxito");
 
     }
@@ -236,6 +241,7 @@ public class Libro {
 
     public static void buscarLibroISBN(List<Libro> listaLibros) {
 
+        // Variable con índice para no encontrado
         int indice = -1;
 
         System.out.print("Introduce el ISBN del libro que quieres bucar: ");
@@ -258,6 +264,7 @@ public class Libro {
             }
         }
 
+        // Mensaje que se muestra en función de si se ha encontrado el libro o no
         if (indice != -1) {
 
             System.out.println("El libro se encuentra en la posición " + indice);
@@ -270,8 +277,11 @@ public class Libro {
 
     public static Libro buscarLibroTitulo(List<Libro> listaLibros) {
 
+        // Variables que usa el método
         String tituloLibro = "";
         boolean encontrado = false;
+
+        // Esta variable fue añadida a posteriori para poder utilizarla en otros métodos
         Libro libroEncontrado = null;
 
         System.out.print("Introduce el titulo del libro que quieres buscar: ");
@@ -295,29 +305,33 @@ public class Libro {
                 libroEncontrado = libro;
             }
         }
-
+        // Mensaje en el caso de que no se encuentre el título
         if (!encontrado) {
             System.out.println("No se ha encontrado ningún libro con el siguiente titulo: " + titulo);
         }
-
+        // Return que fue añadido a posteriori para el método añadirLibroCopia
         return libroEncontrado;
     }
 
     public static void añadirLibroCopia(ArrayList<Libro> listaLibros) {
 
+        // Buscamos el libro y lo almacenamos en una variable de tipo Libro.
         Libro libroOriginal = buscarLibroTitulo(listaLibros);
 
         // Si no se ha encontrado el libro original, mostramos un mensaje de error y salimos del método
         if (libroOriginal != null) {
-
+            // Pasamos el libro al constructor vacio
             Libro libroCopia = new Libro(libroOriginal);
+            // Modiicamos los datos que sean necesarios por el usuario
             libroCopia.modificarDatos();
+            // Añadimos la copia a la lista de libros
             listaLibros.add(libroCopia);
 
+            // Mensaje si todo ha ido bien
             System.out.println("Libro copiado añadido con exito");
 
         } else {
-
+            // Mensaje si ha habido fallos
             System.out.println("No se ha podido añadir el libro");
 
         }
@@ -325,10 +339,12 @@ public class Libro {
 
     public void modificarDatos() {
 
+        // Input que el usuario tiene que introducir
         System.out.println("Datos para modificar: ISBN, titulo, autor, editorial, nCopias, nCopiasDisponibles.");
         System.out.print("Introduce el dato que quieres modificar: ");
         String dato = sc.nextLine();
 
+        // Comprobamos si el dato coincide con alguno de los atributos de los libros
         if (dato.equalsIgnoreCase("isbn")) {
 
             System.out.print("Introduce el ISBN nuevo: ");
@@ -367,12 +383,11 @@ public class Libro {
             this.nCopiasDisponibles = nCopiasDisponiblesNueva;
             
         } else {
-
+            // Si ha habido algún error avisamos al usuario
             System.out.println("No hay ningún dato con el nombre: " + dato);
         }
 
     }
-
 
     @Override
     public String toString() {
