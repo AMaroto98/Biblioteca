@@ -65,10 +65,11 @@ public class Reserva implements Material {
     @Override
     public void mostrarInfoChula() {
 
+        System.out.println("Libro: " + libro + "\n Fecha y Hora: " +  fechaHora);
     }
 
     @Override
     public String toString() {
-        return "Reserva libro: " + libro + ", fechaHora: " + fechaHora;
+        return "Reserva libro: " + libro + ", Fecha Hora: " + fechaHora;
     }
 }
