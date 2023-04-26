@@ -59,7 +59,7 @@ $ code .
 
 ### Diseño
 
-Meter imagen diseño proyecto!!!!
+![Diagrama](/images/Diagrama.jpeg)
 
 El proyecto se encuentra situado en la carpeta `src`, dentro de ella podemos encontrar los diferentes archivos:
 
@@ -99,3 +99,11 @@ Las librerias utilizadas en el proyecto son las siguientes:
     - URI: Es una clase en Java que representa un Identificador de Recursos Uniforme (URI), que es una cadena de caracteres que identifica un recurso en la web. Proporciona métodos para analizar y construir URIs.
 
 ---
+
+### Conclusiones
+
+#### Mejoras
+
+De cara al futuro me gustaría almacenar la información de los libros, reservas, usuarios en una base de datos y poder hacer consultas más especificas.
+Poder ejecutar la aplicación en una interfaz gráfica y no sólo con la terminal.
+
