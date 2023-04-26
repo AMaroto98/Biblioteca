@@ -125,7 +125,7 @@ El proyecto se encuentra situado en la carpeta `src`, dentro de ella podemos enc
 
 - **`añadirUsuario()`:** Crea un nuevo objeto de tipo Usuario, solicita los datos de la persona (nombre, apellidos, edad, teléfono, dirección, código postal y correo electrónico) mediante el método `solicitarDatosPersona()`, lo añade a la lista de personas y muestra un mensaje indicando que el usuario ha sido añadido con éxito.
 
-- **`mostrarUsuario()`:** Recorre una lista de personas e imprime por pantalla los datos de aquellos que sean usuarios (instancias de la clase Usuario). Para ello, se utiliza el bucle for-each para iterar sobre cada elemento de la lista y se comprueba si el elemento es una instancia de la clase Usuario utilizando el operador instanceof. Si es así, se imprime la información de la persona utilizando el método toString().
+- **`mostrarUsuario()`:** Recorre una lista de personas e imprime por pantalla los datos de aquellos que sean usuarios (instancias de la clase Usuario). Para ello, se utiliza el bucle for-each para iterar sobre cada elemento de la lista y se comprueba si el elemento es una instancia de la clase Usuario utilizando el operador instanceof. Si es así, se imprime la información de la persona utilizando el método `toString()`.
 
 - **`eliminarUsuario()`:** Recibe como parámetro un ArrayList de objetos Persona y permite eliminar un Usuario específico de la lista, buscándolo por su número de teléfono.
 
@@ -247,4 +247,3 @@ Las librerias utilizadas en el proyecto son las siguientes:
 
 De cara al futuro me gustaría almacenar la información de los libros, reservas, usuarios en una base de datos y poder hacer consultas más especificas.
 Poder ejecutar la aplicación en una interfaz gráfica y no sólo con la terminal.
-
