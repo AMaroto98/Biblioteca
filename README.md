@@ -36,6 +36,8 @@ Bienvenido/a al proyecto de la Biblioteca del Centro Borja Moll. Este trabajo ha
 
 El objetivo de este desafio era crear una biblioteca que tuviese usuarios y bibliotecarios y que cada uno de ellos pudiera realizar diferentes tareas. En el caso de los usuarios reservar libros y cambiar de contraseña y en el caso de los bibliotecarios buscar libros por título o ISBN, dar de alta nuevos usuarios y trabajadores, reservar y devolver libros para los usuarios y muchas cosas más.
 
+Lo primero que pide el programa al iniciarse es que inicies sesión como bibliotecario o usuario
+
 ---
 
 ### Manual
@@ -74,7 +76,7 @@ $ code .
 
 ### Diseño
 
-![Diagrama](/images/Diagrama.jpeg)
+![Diagrama](/images/Diagrama.png)
 
 El proyecto se encuentra situado en la carpeta `src`, dentro de ella podemos encontrar los diferentes archivos:
 
