@@ -24,8 +24,8 @@
         - [App](#app)
 
 - [Librerias utilizadas](#librerias-utilizadas)
-- [Conclusiones]
-    - [Mejoras]
+- [Conclusiones](#conclusiones)
+    - [Mejoras](#mejoras)
 
 
 ---
