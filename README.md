@@ -60,10 +60,11 @@ $ cd BibliotecaBorjaMoll
 
 Una vez dentro del directorio clonamos el repositorio de Github.
 ~~~
-git clone https://github.com/AMaroto98/BibliotecaV2
+git clone https://github.com/AMaroto98/Biblioteca.git
 ~~~
 
 Accedemos a la carpeta que tendremos tras clonar el proyecto y una vez dentro de la carpeta lo abrimos desde la terminal con VS Code o el IDE que más te guste.
+Si no usas VS Code el comando `code .` no funcionará.
 ~~~
 $ cd BibliotecaV2
 $ code .
